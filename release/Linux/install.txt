@@ -1,0 +1,71 @@
+EnergyPlus Install/Uninstall instructions for Linux operating systems
+----------------------------------------------------------------------------
+
+OPTIONAL SOFTWARE DEPENDENCIES
+---------------------------
+
+   1. bash - The support programs that are distributed with this software are 
+      Bash shell scripts. To use these scripts you will need to have the Bash
+      shell installed on your system.
+
+   2. A PDF viewer (ie. Adobe Reader) to view documentation files.
+
+
+INSTALL ENERGYPLUS
+---------------------------
+   1. Download the EnergyPlus software from the following link. 
+
+   2. The download is a self extracting archive. After the download is 
+      complete, make the downloaded file executable by running the command 
+      (where % is the command prompt and <version> is the current version of 
+      EnergyPlus): 
+      %   chmod +x SetEPlusV810009-lin.sh
+
+   3. The default install location is /usr/local, therefore the installer must 
+      be executed with administrative privileges. Assuming your account has 
+      administrative rights, enter:
+      %   sudo ./SetEPlusV810009-lin.sh
+      Alternatively, you can install without administrative privileges, but 
+      custom paths must be entered when prompted. To install without
+      administrative rights enter:
+      %   ./SetEPlusV810009-lin.sh
+
+   4. Enter your admin password if required by sudo.
+
+   5. The installer will prompt for the installation path. Type the enter key 
+      to accept the default install location. EnergyPlus will be installed to
+      a directory named EnergyPlus-8-1-0.
+
+   6. The installer will prompt for a path where symbolic links will be
+      created to the software executables. The default is /usr/local/bin.
+      Type the enter key to accept the default link location.
+
+   7. If symbolic links were created to a location in your path
+      (ie. /usr/local/bin ), the installation is complete.
+      Type the following for further information on running the included
+      scripts.
+      %   runenergyplus --help
+      %   energyplus --help
+      %   readvarseso --help
+
+   8. If EnergyPlus was installed to a non standard location, you may need to
+      modify the PATH environment variable to point to the bin directory of
+      the EnergyPlus installation. See your distributions documentation for
+      instructions on setting the PATH variable.
+
+UNINSTALL ENERGYPLUS
+---------------------------
+To uninstall EnergyPlus, execute the uninstall.sh script in the EnergyPlus
+installation directory. This script will remove any symbolic links pointing
+to the installation. After the symbolic links are removed, you may remove the
+EnergyPlus-8-1-0 directory to completely remove the installed software.
+
+HELP
+---------------------------
+
+For questions regarding downloading and installing EnergyPlus on Linux 
+operating systems, send email to kyle.benne@nrel.gov and eric.bonnema@nrel.gov.
+
+For any other EnergyPlus related questions, please visit
+http://www.energyplus.gov or send email to
+EnergyPlus-Support@gard.com.

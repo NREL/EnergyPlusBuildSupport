@@ -1,0 +1,8 @@
+You need to obtain the "DOE-2 Translator" from the EnergyPlus website.
+
+http://apps1.eere.energy.gov/buildings/energyplus/energyplus_addons.cfm
+
+Additional Release Components will give you the information.
+
+DOE2Translator.zip
+

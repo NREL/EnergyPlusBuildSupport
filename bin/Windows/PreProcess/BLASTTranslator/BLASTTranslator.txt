@@ -1,0 +1,8 @@
+You need to obtain the "BLAST Translator" from the EnergyPlus website.
+
+http://apps1.eere.energy.gov/buildings/energyplus/energyplus_addons.cfm
+
+Under Additional Release Components will be instructions.
+
+BLASTTranslator.zip
+
