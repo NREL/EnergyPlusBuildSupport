@@ -38,6 +38,7 @@ list( APPEND VERSIONS 7_1_0 )
 list( APPEND VERSIONS 7_2_0 )
 list( APPEND VERSIONS 8_0_0 )
 list( APPEND VERSIONS 8_1_0 )
+list( APPEND VERSIONS 8_2_0 )
 
 IF(UNIX) # Mac and Linux
   SET(CMAKE_Fortran_FLAGS "-nologo")
@@ -56,7 +57,7 @@ IF(UNIX) # Mac and Linux
   SET(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -prec-sqrt")
   SET(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fpp")
   SET(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -inline-level=0")
-  SET(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Qvec-")
+#  SET(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -Qvec-")
 ELSE()
   SET(CMAKE_Fortran_FLAGS_RELEASE "")
   SET(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} /assume:buffered_io")
