@@ -302,7 +302,7 @@
               SELECT CASE (MakeUPPERCase(TRIM(IDFRecords(Num)%Name)))
 
               CASE ('VERSION')
-                IF ((InArgs(1)(1:3) == '8.1').and. ArgFile) THEN
+                IF ((InArgs(1)(1:3) == '8.2').and. ArgFile) THEN
                   CALL ShowWarningError('File is already at latest version.  No new diff file made.',Auditf)
                   CLOSE(diflfn,STATUS='DELETE')
                   LatestVersion=.true.
