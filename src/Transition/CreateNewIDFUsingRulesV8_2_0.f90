@@ -309,345 +309,381 @@
                   EXIT
                 ENDIF
                 CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                OutArgs(1)='8.1'
+                OutArgs(1)='8.2'
                 nodiff=.false.
 
 !    !!!    Changes for this version
-              CASE('PEOPLE')
+              CASE('ZONEHVAC:UNITVENTILATOR')
                 nodiff=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
-                if (CurArgs > 15) then
-                  OutArgs(16)='ClothingInsulationSchedule'
+                CALL GetNewObjectDefInIDD(ObjectName,NwNUmArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+                OutArgs(1:16)=InArgs(1:16)
+                if (CurArgs > 16) then
                   OutArgs(17)=blank
-                  OutArgs(18:CurArgs+2)=InArgs(16:CurArgs)
-                  CurArgs=CurArgs+2
+                  if (CurArgs > 17) then
+                    OutArgs(18:CurArgs+1)=InArgs(17:CurArgs)
+                  endif
                 endif
+                CurArgs = CurArgs + 1
 
-              CASE('COOLINGTOWER:SINGLESPEED')
+              CASE('ZONEHVAC:UNITHEATER')
                 nodiff=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                ! output min-fields 16
-                OutArgs(1:8)=InArgs(1:8)
-                if (samestring(OutArgs(8),'autosize')) OutArgs(8)='autocalculate'
-                OutArgs(9)=blank
-                OutArgs(10)=InArgs(9)
-                if (samestring(OutArgs(10),'autosize')) OutArgs(10)='autocalculate'
-                OutArgs(11)=blank
-                OutArgs(12)=InArgs(10)
-                OutArgs(13)=blank
-                OutArgs(14:15)=InArgs(11:12)
-                OutArgs(16)=blank
-                if (CurArgs > 12) OutArgs(17:CurArgs+4)=InArgs(13:CurArgs)
-                CurArgs=CurArgs+4
-
-              CASE('COOLINGTOWER:TWOSPEED')
-                nodiff=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                ! output min-fields 24
-                OutArgs(1:8)=InArgs(1:8)
-                if (samestring(OutArgs(8),'autosize')) OutArgs(8)='autocalculate'
-                OutArgs(9)=blank
-                OutArgs(10)=InArgs(9)
-                if (samestring(OutArgs(8),'autosize')) OutArgs(10)='autocalculate'
-                OutArgs(11)=blank
-                OutArgs(12)=InArgs(10)
-                OutArgs(13)=blank
-                OutArgs(14)=InArgs(11)
-                if (samestring(OutArgs(14),'autosize')) OutArgs(14)='autocalculate'
-                OutArgs(15)=blank
-                OutArgs(16)=InArgs(12)
-                if (samestring(OutArgs(16),'autosize')) OutArgs(16)='autocalculate'
-                OutArgs(17)=blank
-                OutArgs(18)=InArgs(13)
-                OutArgs(19)=blank
-                OutArgs(20:21)=InArgs(14:15)
-                OutArgs(22)=blank
-                OutArgs(23)=InArgs(16)
-                OutArgs(24)=blank
-                IF (CurArgs > 16) OutArgs(25:CurArgs+8)=InArgs(17:CurArgs)
-                CurArgs=CurArgs+8
-
-              CASE('EVAPORATIVEFLUIDCOOLER:SINGLESPEED')
-                nodiff=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                ! output min-fields 10
-                OutArgs(1:8)=InArgs(1:8)
-                OutArgs(9)=blank
-                if (CurArgs > 8) OutArgs(10:CurArgs+1)=InArgs(9:CurArgs)
-                CurArgs=CurArgs+1
-
-              CASE('EVAPORATIVEFLUIDCOOLER:TWOSPEED')
-                nodiff=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                ! output min-fields 23
-                OutArgs(1:6)=InArgs(1:6)
-                if (samestring(OutArgs(6),'autosize')) OutArgs(6)='autocalculate'
-                OutArgs(7)=blank
-                OutArgs(8)=InArgs(7)
-                if (samestring(OutArgs(8),'autosize')) OutArgs(8)='autocalculate'
-                OutArgs(9)=blank
-                OutArgs(10:12)=InArgs(8:10)
-                OutArgs(13)=blank
-                OutArgs(14:15)=InArgs(11:12)
-                OutArgs(16)=blank
-                OutArgs(17:18)=InArgs(13:14)
-                if (samestring(OutArgs(18),'autosize')) OutArgs(18)='autocalculate'
-                OutArgs(19)=blank
-                OutArgs(20:22)=InArgs(15:17)
-                OutArgs(23)=blank
-                if (CurArgs > 17) OutArgs(24:CurArgs+6)=InArgs(18:CurArgs)
-                CurArgs=CurArgs+6
-
-              CASE('FLUIDCOOLER:TWOSPEED')
-                nodiff=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                ! output min-fields 20
-                OutArgs(1:6)=InArgs(1:6)
-                if (samestring(OutArgs(6),'autosize')) OutArgs(6)='autocalculate'
-                OutArgs(7)=blank
-                OutArgs(8:9)=InArgs(7:8)
+                CALL GetNewObjectDefInIDD(ObjectName,NwNUmArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+                OutArgs(1:7)=InArgs(1:7)
+                ! delete field 8
+                ! ..nothing with InArgs(8) then
+                !move fields 9 and 10 to now be 8 and 9
+                OutArgs(8:9)=InArgs(9:10)
+                ! add blank for the optional schedule
                 OutArgs(10)=blank
-                OutArgs(11:17)=InArgs(9:15)
-                if (samestring(OutArgs(17),'autosize')) OutArgs(17)='autocalculate'
-                OutArgs(18)=blank
-                OutArgs(19)=InArgs(16)
-                if (samestring(OutArgs(19),'autosize')) OutArgs(19)='autocalculate'
-                OutArgs(20)=blank
-                if (CurArgs > 16) OutArgs(21)=InArgs(17)
-                CurArgs=CurArgs+4
+                ! conditionally apply field 11 (A10)
+                if (SameString(InArgs(8), "ONOFF")) then
+                  OutArgs(11)="No"
+                elseif (SameString(InArgs(8), "CONTINUOUS")) then 
+                  OutArgs(11)="Yes"
+                else
+                  CALL ShowWarningError("Invalid fan control type in original v8.1 idf...expected onoff or continuous...assuming onoff")
+                  OutArgs(11)="No"
+                endif
+                ! the net effect here is the addition of 1 field
+                OutArgs(12:)=InArgs(11:)
+                CurArgs = CurArgs + 1
+           
 
-              CASE('HEATPUMP:WATERTOWATER:EQUATIONFIT:HEATING')
-                nodiff=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                ! output min-fields 19
-                OutArgs(1:19)=InArgs(1:19)
-                if (CurArgs < 19) OutArgs(CurArgs+1:19)=blank
-                CurArgs=19
-
-              CASE('HEATPUMP:WATERTOWATER:EQUATIONFIT:COOLING')
-                nodiff=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                ! output min-fields 19
-                OutArgs(1:19)=InArgs(1:19)
-                if (CurArgs < 19) OutArgs(CurArgs+1:19)=blank
-                CurArgs=19
-
-              CASE('HEATPUMP:WATERTOWATER:PARAMETERESTIMATION:HEATING')
-                nodiff=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                ! output min-fields 20
-                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
-                if (CurArgs < 20) OutArgs(CurArgs+1:20)=blank
-                if (CurArgs == 23) CurArgs=22
-
-              CASE('HEATPUMP:WATERTOWATER:PARAMETERESTIMATION:COOLING')
-                nodiff=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                ! output min-fields 20
-                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
-                if (CurArgs < 20) OutArgs(CurArgs+1:20)=blank
-                if (CurArgs == 23) CurArgs=22
-
-              CASE('HVACTEMPLATE:ZONE:PTAC')
-                nodiff=.false.
-                cycling=.false.
-                continuous=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
-                OutScheduleName=blank
-                IF (SameString(OutArgs(13),'Cycling')) THEN
-                  OutArgs(13)='HVACTemplate:Zone:PTAC'//OutArgs(1)(1:min(len_trim(OutArgs(1)),59))//'CyclingFanSchedule'
-                  OutScheduleName=OutArgs(13)
-                  cycling=.true.
-                ELSEIF (SameString(OutArgs(13),'Continuous')) THEN
-                  OutArgs(13)='HVACTemplate:Zone:PTAC'//OutArgs(1)(1:min(len_trim(OutArgs(1)),56))//'ContinuousFanSchedule'
-                  OutScheduleName=OutArgs(13)
-                  continuous=.true.
-                ENDIF
-                CALL WriteOutIDFLines(DifLfn,ObjectName,CurArgs,OutArgs,NwFldNames,NwFldUnits)
-
-                IF (.not. ScheduleTypeLimitsAnyNumber) THEN
-                  CALL GetNewObjectDefInIDD('ScheduleTypeLimits',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                  OutArgs(1)='Any Number'
-                  CurArgs=1
-                  CALL WriteOutIDFLines(DifLfn,'ScheduleTypeLimits',CurArgs,OutArgs,NwFldNames,NwFldUnits)
-                ENDIF
-
-                IF (cycling .or. continuous) THEN
-                  CALL GetNewObjectDefInIDD('Schedule:Constant',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                  OutArgs(1)=OutScheduleName
-                  OutArgs(2)='Any Number'
-                  CurArgs=3
-                  IF (cycling) THEN
-                    OutArgs(3)='0'
-                  ENDIF
-                  IF (continuous) THEN
-                    OutArgs(3)='1'
-                  ENDIF
-                  CALL WriteOutIDFLines(DifLfn,'Schedule:Constant',CurArgs,OutArgs,NwFldNames,NwFldUnits)
-                ENDIF
-                CYCLE
-
-              CASE('HVACTEMPLATE:ZONE:PTHP')
-                nodiff=.false.
-                cycling=.false.
-                continuous=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
-                OutScheduleName=blank
-                IF (SameString(OutArgs(13),'Cycling')) THEN
-                  OutArgs(13)='HVACTemplate:Zone:PTHP'//OutArgs(1)(1:min(len_trim(OutArgs(1)),59))//'CyclingFanSchedule'
-                  OutScheduleName=OutArgs(13)
-                  cycling=.true.
-                ELSEIF (SameString(OutArgs(13),'Continuous')) THEN
-                  OutArgs(13)='HVACTemplate:Zone:PTHP'//OutArgs(1)(1:min(len_trim(OutArgs(1)),56))//'ContinuousFanSchedule'
-                  OutScheduleName=OutArgs(13)
-                  continuous=.true.
-                ENDIF
-                CALL WriteOutIDFLines(DifLfn,ObjectName,CurArgs,OutArgs,NwFldNames,NwFldUnits)
-
-                IF (.not. ScheduleTypeLimitsAnyNumber) THEN
-                  CALL GetNewObjectDefInIDD('ScheduleTypeLimits',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                  OutArgs(1)='Any Number'
-                  CurArgs=1
-                  CALL WriteOutIDFLines(DifLfn,'ScheduleTypeLimits',CurArgs,OutArgs,NwFldNames,NwFldUnits)
-                ENDIF
-
-                IF (cycling .or. continuous) THEN
-                  CALL GetNewObjectDefInIDD('Schedule:Constant',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                  OutArgs(1)=OutScheduleName
-                  OutArgs(2)='Any Number'
-                  CurArgs=3
-                  IF (cycling) THEN
-                    OutArgs(3)='0'
-                  ENDIF
-                  IF (continuous) THEN
-                    OutArgs(3)='1'
-                  ENDIF
-                  CALL WriteOutIDFLines(DifLfn,'Schedule:Constant',CurArgs,OutArgs,NwFldNames,NwFldUnits)
-                ENDIF
-                CYCLE
-
-              CASE('HVACTEMPLATE:ZONE:WATERTOAIRHEATPUMP')
-                nodiff=.false.
-                cycling=.false.
-                continuous=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
-                OutScheduleName=blank
-                IF (SameString(OutArgs(13),'Cycling')) THEN
-                  OutArgs(13)='HVACTemplate:Zone:WaterToAirHeatPump'//OutArgs(1)(1:min(len_trim(OutArgs(1)),45))//'CyclingFanSchedule'
-                  OutScheduleName=OutArgs(13)
-                  cycling=.true.
-                ELSEIF (SameString(OutArgs(13),'Continuous')) THEN
-                  OutArgs(13)='HVACTemplate:Zone:WaterToAirHeatPump'//OutArgs(1)(1:min(len_trim(OutArgs(1)),42))//'ContinuousFanSchedule'
-                  OutScheduleName=OutArgs(13)
-                  continuous=.true.
-                ENDIF
-                CALL WriteOutIDFLines(DifLfn,ObjectName,CurArgs,OutArgs,NwFldNames,NwFldUnits)
-
-                IF (.not. ScheduleTypeLimitsAnyNumber) THEN
-                  CALL GetNewObjectDefInIDD('ScheduleTypeLimits',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                  OutArgs(1)='Any Number'
-                  CurArgs=1
-                  CALL WriteOutIDFLines(DifLfn,'ScheduleTypeLimits',CurArgs,OutArgs,NwFldNames,NwFldUnits)
-                ENDIF
-
-                IF (cycling .or. continuous) THEN
-                  CALL GetNewObjectDefInIDD('Schedule:Constant',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                  OutArgs(1)=OutScheduleName
-                  OutArgs(2)='Any Number'
-                  CurArgs=3
-                  IF (cycling) THEN
-                    OutArgs(3)='0'
-                  ENDIF
-                  IF (continuous) THEN
-                    OutArgs(3)='1'
-                  ENDIF
-                  CALL WriteOutIDFLines(DifLfn,'Schedule:Constant',CurArgs,OutArgs,NwFldNames,NwFldUnits)
-                ENDIF
-                CYCLE
-
-              CASE('HVACTEMPLATE:SYSTEM:UNITARY')
-                nodiff=.false.
-                cycling=.false.
-                continuous=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
-                OutScheduleName=blank
-                IF (SameString(OutArgs(5),'Cycling')) THEN
-                  OutArgs(5)='HVACTemplate:System:Unitary'//OutArgs(1)(1:min(len_trim(OutArgs(1)),54))//'CyclingFanSchedule'
-                  OutScheduleName=OutArgs(5)
-                  cycling=.true.
-                ELSEIF (SameString(OutArgs(5),'Continuous')) THEN
-                  OutArgs(5)='HVACTemplate:System:Unitary'//OutArgs(1)(1:min(len_trim(OutArgs(1)),51))//'ContinuousFanSchedule'
-                  OutScheduleName=OutArgs(5)
-                  continuous=.true.
-                ENDIF
-                CALL WriteOutIDFLines(DifLfn,ObjectName,CurArgs,OutArgs,NwFldNames,NwFldUnits)
-
-                IF (.not. ScheduleTypeLimitsAnyNumber) THEN
-                  CALL GetNewObjectDefInIDD('ScheduleTypeLimits',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                  OutArgs(1)='Any Number'
-                  CurArgs=1
-                  CALL WriteOutIDFLines(DifLfn,'ScheduleTypeLimits',CurArgs,OutArgs,NwFldNames,NwFldUnits)
-                ENDIF
-
-                IF (cycling .or. continuous) THEN
-                  CALL GetNewObjectDefInIDD('Schedule:Constant',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                  OutArgs(1)=OutScheduleName
-                  OutArgs(2)='Any Number'
-                  CurArgs=3
-                  IF (cycling) THEN
-                    OutArgs(3)='0'
-                  ENDIF
-                  IF (continuous) THEN
-                    OutArgs(3)='1'
-                  ENDIF
-                  CALL WriteOutIDFLines(DifLfn,'Schedule:Constant',CurArgs,OutArgs,NwFldNames,NwFldUnits)
-                ENDIF
-                CYCLE
-
-              CASE('HVACTEMPLATE:SYSTEM:UNITARYHEATPUMP:AIRTOAIR')
-                nodiff=.false.
-                cycling=.false.
-                continuous=.false.
-                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
-                OutScheduleName=blank
-                IF (SameString(OutArgs(7),'Cycling')) THEN
-                  OutArgs(7)='HVACTemplate:System:UnitaryHeatPump:AirToAir'//OutArgs(1)(1:min(len_trim(OutArgs(1)),37))//'CyclingFanSchedule'
-                  OutScheduleName=OutArgs(7)
-                  cycling=.true.
-                ELSEIF (SameString(OutArgs(7),'Continuous')) THEN
-                  OutArgs(7)='HVACTemplate:System:UnitaryHeatPump:AirToAir'//OutArgs(1)(1:min(len_trim(OutArgs(1)),34))//'ContinuousFanSchedule'
-                  OutScheduleName=OutArgs(7)
-                  continuous=.true.
-                ENDIF
-                CALL WriteOutIDFLines(DifLfn,ObjectName,CurArgs,OutArgs,NwFldNames,NwFldUnits)
-
-                IF (.not. ScheduleTypeLimitsAnyNumber) THEN
-                  CALL GetNewObjectDefInIDD('ScheduleTypeLimits',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                  OutArgs(1)='Any Number'
-                  CurArgs=1
-                  CALL WriteOutIDFLines(DifLfn,'ScheduleTypeLimits',CurArgs,OutArgs,NwFldNames,NwFldUnits)
-                ENDIF
-
-                IF (cycling .or. continuous) THEN
-                  CALL GetNewObjectDefInIDD('Schedule:Constant',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
-                  OutArgs(1)=OutScheduleName
-                  OutArgs(2)='Any Number'
-                  CurArgs=3
-                  IF (cycling) THEN
-                    OutArgs(3)='0'
-                  ENDIF
-                  IF (continuous) THEN
-                    OutArgs(3)='1'
-                  ENDIF
-                  CALL WriteOutIDFLines(DifLfn,'Schedule:Constant',CurArgs,OutArgs,NwFldNames,NwFldUnits)
-                ENDIF
-                CYCLE
+!              CASE('PEOPLE')
+!                nodiff=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
+!                if (CurArgs > 15) then
+!                  OutArgs(16)='ClothingInsulationSchedule'
+!                  OutArgs(17)=blank
+!                  OutArgs(18:CurArgs+2)=InArgs(16:CurArgs)
+!                  CurArgs=CurArgs+2
+!                endif
+!
+!              CASE('COOLINGTOWER:SINGLESPEED')
+!                nodiff=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                ! output min-fields 16
+!                OutArgs(1:8)=InArgs(1:8)
+!                if (samestring(OutArgs(8),'autosize')) OutArgs(8)='autocalculate'
+!                OutArgs(9)=blank
+!                OutArgs(10)=InArgs(9)
+!                if (samestring(OutArgs(10),'autosize')) OutArgs(10)='autocalculate'
+!                OutArgs(11)=blank
+!                OutArgs(12)=InArgs(10)
+!                OutArgs(13)=blank
+!                OutArgs(14:15)=InArgs(11:12)
+!                OutArgs(16)=blank
+!                if (CurArgs > 12) OutArgs(17:CurArgs+4)=InArgs(13:CurArgs)
+!                CurArgs=CurArgs+4
+!
+!              CASE('COOLINGTOWER:TWOSPEED')
+!                nodiff=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                ! output min-fields 24
+!                OutArgs(1:8)=InArgs(1:8)
+!                if (samestring(OutArgs(8),'autosize')) OutArgs(8)='autocalculate'
+!                OutArgs(9)=blank
+!                OutArgs(10)=InArgs(9)
+!                if (samestring(OutArgs(8),'autosize')) OutArgs(10)='autocalculate'
+!                OutArgs(11)=blank
+!                OutArgs(12)=InArgs(10)
+!                OutArgs(13)=blank
+!                OutArgs(14)=InArgs(11)
+!                if (samestring(OutArgs(14),'autosize')) OutArgs(14)='autocalculate'
+!                OutArgs(15)=blank
+!                OutArgs(16)=InArgs(12)
+!                if (samestring(OutArgs(16),'autosize')) OutArgs(16)='autocalculate'
+!                OutArgs(17)=blank
+!                OutArgs(18)=InArgs(13)
+!                OutArgs(19)=blank
+!                OutArgs(20:21)=InArgs(14:15)
+!                OutArgs(22)=blank
+!                OutArgs(23)=InArgs(16)
+!                OutArgs(24)=blank
+!                IF (CurArgs > 16) OutArgs(25:CurArgs+8)=InArgs(17:CurArgs)
+!                CurArgs=CurArgs+8
+!
+!              CASE('EVAPORATIVEFLUIDCOOLER:SINGLESPEED')
+!                nodiff=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                ! output min-fields 10
+!                OutArgs(1:8)=InArgs(1:8)
+!                OutArgs(9)=blank
+!                if (CurArgs > 8) OutArgs(10:CurArgs+1)=InArgs(9:CurArgs)
+!                CurArgs=CurArgs+1
+!
+!              CASE('EVAPORATIVEFLUIDCOOLER:TWOSPEED')
+!                nodiff=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                ! output min-fields 23
+!                OutArgs(1:6)=InArgs(1:6)
+!                if (samestring(OutArgs(6),'autosize')) OutArgs(6)='autocalculate'
+!                OutArgs(7)=blank
+!                OutArgs(8)=InArgs(7)
+!                if (samestring(OutArgs(8),'autosize')) OutArgs(8)='autocalculate'
+!                OutArgs(9)=blank
+!                OutArgs(10:12)=InArgs(8:10)
+!                OutArgs(13)=blank
+!                OutArgs(14:15)=InArgs(11:12)
+!                OutArgs(16)=blank
+!                OutArgs(17:18)=InArgs(13:14)
+!                if (samestring(OutArgs(18),'autosize')) OutArgs(18)='autocalculate'
+!                OutArgs(19)=blank
+!                OutArgs(20:22)=InArgs(15:17)
+!                OutArgs(23)=blank
+!                if (CurArgs > 17) OutArgs(24:CurArgs+6)=InArgs(18:CurArgs)
+!                CurArgs=CurArgs+6
+!
+!              CASE('FLUIDCOOLER:TWOSPEED')
+!                nodiff=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                ! output min-fields 20
+!                OutArgs(1:6)=InArgs(1:6)
+!                if (samestring(OutArgs(6),'autosize')) OutArgs(6)='autocalculate'
+!                OutArgs(7)=blank
+!                OutArgs(8:9)=InArgs(7:8)
+!                OutArgs(10)=blank
+!                OutArgs(11:17)=InArgs(9:15)
+!                if (samestring(OutArgs(17),'autosize')) OutArgs(17)='autocalculate'
+!                OutArgs(18)=blank
+!                OutArgs(19)=InArgs(16)
+!                if (samestring(OutArgs(19),'autosize')) OutArgs(19)='autocalculate'
+!                OutArgs(20)=blank
+!                if (CurArgs > 16) OutArgs(21)=InArgs(17)
+!                CurArgs=CurArgs+4
+!
+!              CASE('HEATPUMP:WATERTOWATER:EQUATIONFIT:HEATING')
+!                nodiff=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                ! output min-fields 19
+!                OutArgs(1:19)=InArgs(1:19)
+!                if (CurArgs < 19) OutArgs(CurArgs+1:19)=blank
+!                CurArgs=19
+!
+!              CASE('HEATPUMP:WATERTOWATER:EQUATIONFIT:COOLING')
+!                nodiff=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                ! output min-fields 19
+!                OutArgs(1:19)=InArgs(1:19)
+!                if (CurArgs < 19) OutArgs(CurArgs+1:19)=blank
+!                CurArgs=19
+!
+!              CASE('HEATPUMP:WATERTOWATER:PARAMETERESTIMATION:HEATING')
+!                nodiff=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                ! output min-fields 20
+!                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
+!                if (CurArgs < 20) OutArgs(CurArgs+1:20)=blank
+!                if (CurArgs == 23) CurArgs=22
+!
+!              CASE('HEATPUMP:WATERTOWATER:PARAMETERESTIMATION:COOLING')
+!                nodiff=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                ! output min-fields 20
+!                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
+!                if (CurArgs < 20) OutArgs(CurArgs+1:20)=blank
+!                if (CurArgs == 23) CurArgs=22
+!
+!              CASE('HVACTEMPLATE:ZONE:PTAC')
+!                nodiff=.false.
+!                cycling=.false.
+!                continuous=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
+!                OutScheduleName=blank
+!                IF (SameString(OutArgs(13),'Cycling')) THEN
+!                  OutArgs(13)='HVACTemplate:Zone:PTAC'//OutArgs(1)(1:min(len_trim(OutArgs(1)),59))//'CyclingFanSchedule'
+!                  OutScheduleName=OutArgs(13)
+!                  cycling=.true.
+!                ELSEIF (SameString(OutArgs(13),'Continuous')) THEN
+!                  OutArgs(13)='HVACTemplate:Zone:PTAC'//OutArgs(1)(1:min(len_trim(OutArgs(1)),56))//'ContinuousFanSchedule'
+!                  OutScheduleName=OutArgs(13)
+!                  continuous=.true.
+!                ENDIF
+!                CALL WriteOutIDFLines(DifLfn,ObjectName,CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!
+!                IF (.not. ScheduleTypeLimitsAnyNumber) THEN
+!                  CALL GetNewObjectDefInIDD('ScheduleTypeLimits',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                  OutArgs(1)='Any Number'
+!                  CurArgs=1
+!                  CALL WriteOutIDFLines(DifLfn,'ScheduleTypeLimits',CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!                ENDIF
+!
+!                IF (cycling .or. continuous) THEN
+!                  CALL GetNewObjectDefInIDD('Schedule:Constant',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                  OutArgs(1)=OutScheduleName
+!                  OutArgs(2)='Any Number'
+!                  CurArgs=3
+!                  IF (cycling) THEN
+!                    OutArgs(3)='0'
+!                  ENDIF
+!                  IF (continuous) THEN
+!                    OutArgs(3)='1'
+!                  ENDIF
+!                  CALL WriteOutIDFLines(DifLfn,'Schedule:Constant',CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!                ENDIF
+!                CYCLE
+!
+!              CASE('HVACTEMPLATE:ZONE:PTHP')
+!                nodiff=.false.
+!                cycling=.false.
+!                continuous=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
+!                OutScheduleName=blank
+!                IF (SameString(OutArgs(13),'Cycling')) THEN
+!                  OutArgs(13)='HVACTemplate:Zone:PTHP'//OutArgs(1)(1:min(len_trim(OutArgs(1)),59))//'CyclingFanSchedule'
+!                  OutScheduleName=OutArgs(13)
+!                  cycling=.true.
+!                ELSEIF (SameString(OutArgs(13),'Continuous')) THEN
+!                  OutArgs(13)='HVACTemplate:Zone:PTHP'//OutArgs(1)(1:min(len_trim(OutArgs(1)),56))//'ContinuousFanSchedule'
+!                  OutScheduleName=OutArgs(13)
+!                  continuous=.true.
+!                ENDIF
+!                CALL WriteOutIDFLines(DifLfn,ObjectName,CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!
+!                IF (.not. ScheduleTypeLimitsAnyNumber) THEN
+!                  CALL GetNewObjectDefInIDD('ScheduleTypeLimits',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                  OutArgs(1)='Any Number'
+!                  CurArgs=1
+!                  CALL WriteOutIDFLines(DifLfn,'ScheduleTypeLimits',CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!                ENDIF
+!
+!                IF (cycling .or. continuous) THEN
+!                  CALL GetNewObjectDefInIDD('Schedule:Constant',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                  OutArgs(1)=OutScheduleName
+!                  OutArgs(2)='Any Number'
+!                  CurArgs=3
+!                  IF (cycling) THEN
+!                    OutArgs(3)='0'
+!                  ENDIF
+!                  IF (continuous) THEN
+!                    OutArgs(3)='1'
+!                  ENDIF
+!                  CALL WriteOutIDFLines(DifLfn,'Schedule:Constant',CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!                ENDIF
+!                CYCLE
+!
+!              CASE('HVACTEMPLATE:ZONE:WATERTOAIRHEATPUMP')
+!                nodiff=.false.
+!                cycling=.false.
+!                continuous=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
+!                OutScheduleName=blank
+!                IF (SameString(OutArgs(13),'Cycling')) THEN
+!                  OutArgs(13)='HVACTemplate:Zone:WaterToAirHeatPump'//OutArgs(1)(1:min(len_trim(OutArgs(1)),45))//'CyclingFanSchedule'
+!                  OutScheduleName=OutArgs(13)
+!                  cycling=.true.
+!                ELSEIF (SameString(OutArgs(13),'Continuous')) THEN
+!                  OutArgs(13)='HVACTemplate:Zone:WaterToAirHeatPump'//OutArgs(1)(1:min(len_trim(OutArgs(1)),42))//'ContinuousFanSchedule'
+!                  OutScheduleName=OutArgs(13)
+!                  continuous=.true.
+!                ENDIF
+!                CALL WriteOutIDFLines(DifLfn,ObjectName,CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!
+!                IF (.not. ScheduleTypeLimitsAnyNumber) THEN
+!                  CALL GetNewObjectDefInIDD('ScheduleTypeLimits',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                  OutArgs(1)='Any Number'
+!                  CurArgs=1
+!                  CALL WriteOutIDFLines(DifLfn,'ScheduleTypeLimits',CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!                ENDIF
+!
+!                IF (cycling .or. continuous) THEN
+!                  CALL GetNewObjectDefInIDD('Schedule:Constant',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                  OutArgs(1)=OutScheduleName
+!                  OutArgs(2)='Any Number'
+!                  CurArgs=3
+!                  IF (cycling) THEN
+!                    OutArgs(3)='0'
+!                  ENDIF
+!                  IF (continuous) THEN
+!                    OutArgs(3)='1'
+!                  ENDIF
+!                  CALL WriteOutIDFLines(DifLfn,'Schedule:Constant',CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!                ENDIF
+!                CYCLE
+!
+!              CASE('HVACTEMPLATE:SYSTEM:UNITARY')
+!                nodiff=.false.
+!                cycling=.false.
+!                continuous=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
+!                OutScheduleName=blank
+!                IF (SameString(OutArgs(5),'Cycling')) THEN
+!                  OutArgs(5)='HVACTemplate:System:Unitary'//OutArgs(1)(1:min(len_trim(OutArgs(1)),54))//'CyclingFanSchedule'
+!                  OutScheduleName=OutArgs(5)
+!                  cycling=.true.
+!                ELSEIF (SameString(OutArgs(5),'Continuous')) THEN
+!                  OutArgs(5)='HVACTemplate:System:Unitary'//OutArgs(1)(1:min(len_trim(OutArgs(1)),51))//'ContinuousFanSchedule'
+!                  OutScheduleName=OutArgs(5)
+!                  continuous=.true.
+!                ENDIF
+!                CALL WriteOutIDFLines(DifLfn,ObjectName,CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!
+!                IF (.not. ScheduleTypeLimitsAnyNumber) THEN
+!                  CALL GetNewObjectDefInIDD('ScheduleTypeLimits',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                  OutArgs(1)='Any Number'
+!                  CurArgs=1
+!                  CALL WriteOutIDFLines(DifLfn,'ScheduleTypeLimits',CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!                ENDIF
+!
+!                IF (cycling .or. continuous) THEN
+!                  CALL GetNewObjectDefInIDD('Schedule:Constant',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                  OutArgs(1)=OutScheduleName
+!                  OutArgs(2)='Any Number'
+!                  CurArgs=3
+!                  IF (cycling) THEN
+!                    OutArgs(3)='0'
+!                  ENDIF
+!                  IF (continuous) THEN
+!                    OutArgs(3)='1'
+!                  ENDIF
+!                  CALL WriteOutIDFLines(DifLfn,'Schedule:Constant',CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!                ENDIF
+!                CYCLE
+!
+!              CASE('HVACTEMPLATE:SYSTEM:UNITARYHEATPUMP:AIRTOAIR')
+!                nodiff=.false.
+!                cycling=.false.
+!                continuous=.false.
+!                CALL GetNewObjectDefInIDD(ObjectName,NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                OutArgs(1:CurArgs)=InArgs(1:CurArgs)
+!                OutScheduleName=blank
+!                IF (SameString(OutArgs(7),'Cycling')) THEN
+!                  OutArgs(7)='HVACTemplate:System:UnitaryHeatPump:AirToAir'//OutArgs(1)(1:min(len_trim(OutArgs(1)),37))//'CyclingFanSchedule'
+!                  OutScheduleName=OutArgs(7)
+!                  cycling=.true.
+!                ELSEIF (SameString(OutArgs(7),'Continuous')) THEN
+!                  OutArgs(7)='HVACTemplate:System:UnitaryHeatPump:AirToAir'//OutArgs(1)(1:min(len_trim(OutArgs(1)),34))//'ContinuousFanSchedule'
+!                  OutScheduleName=OutArgs(7)
+!                  continuous=.true.
+!                ENDIF
+!                CALL WriteOutIDFLines(DifLfn,ObjectName,CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!
+!                IF (.not. ScheduleTypeLimitsAnyNumber) THEN
+!                  CALL GetNewObjectDefInIDD('ScheduleTypeLimits',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                  OutArgs(1)='Any Number'
+!                  CurArgs=1
+!                  CALL WriteOutIDFLines(DifLfn,'ScheduleTypeLimits',CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!                ENDIF
+!
+!                IF (cycling .or. continuous) THEN
+!                  CALL GetNewObjectDefInIDD('Schedule:Constant',NwNumArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+!                  OutArgs(1)=OutScheduleName
+!                  OutArgs(2)='Any Number'
+!                  CurArgs=3
+!                  IF (cycling) THEN
+!                    OutArgs(3)='0'
+!                  ENDIF
+!                  IF (continuous) THEN
+!                    OutArgs(3)='1'
+!                  ENDIF
+!                  CALL WriteOutIDFLines(DifLfn,'Schedule:Constant',CurArgs,OutArgs,NwFldNames,NwFldUnits)
+!                ENDIF
+!                CYCLE
 
     !!!   Changes for report variables, meters, tables -- update names
 

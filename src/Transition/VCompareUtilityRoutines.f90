@@ -652,6 +652,9 @@ INCLUDE 'CreateNewIDFUsingRulesV8_0_0.f90'
 #ifdef V8_1_0
 INCLUDE 'CreateNewIDFUsingRulesV8_1_0.f90'
 #endif
+#ifdef V8_2_0
+INCLUDE 'CreateNewIDFUsingRulesV8_2_0.f90'
+#endif
 END SUBROUTINE CreateNewIDFUsingRules
 
 
