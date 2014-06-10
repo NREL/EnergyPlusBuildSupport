@@ -1,0 +1,6 @@
+8.1.0.009,8.2,Transition notes
+3,3,These numbers should be the number of report variables in the following list (including deletes). Two columns/numbers.
+old variable name,new variable name,-- add variable names (before this line) and leave off units -- <DELETE> to delete
+Zone Thermal Chimney Air Volume Flow Rate,Zone Thermal Chimney Current Density Volumetric Flow Rate,
+Zone Earth Tube Air Volume Flow Rate,Zone Earth Tube Current Density Volumetric Flow Rate,
+Zone Cooltower Air Volume Flow Rate,Zone Cooltower Current Density Volumetric Flow Rate,
