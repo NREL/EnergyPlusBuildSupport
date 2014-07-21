@@ -348,6 +348,20 @@
                 OutArgs(12:)=InArgs(11:)
                 CurArgs = CurArgs + 1
       
+              CASE('PLANTLOOP')
+                nodiff=.false.
+                CALL GetNewObjectDefInIDD(ObjectName,NwNUmArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
+                ! assign the entire contents of IN to OUT to start
+                OutArgs=InArgs
+                ! then check the value of 19 and make a decision:
+                if (SameString(InArgs(19), "SEQUENTIAL")) then
+                  OutArgs(19)="SequentialLoad"
+                elseif (SameString(InArgs(19), "UNIFORM")) then
+                  OutArgs(19)="UniformLoad"
+                else
+                  OutArgs(19)=InArgs(19) ! Redundant, but clear
+                endif
+                
     !!!   Changes for report variables, meters, tables -- update names
 
               CASE('OUTPUT:VARIABLE')
