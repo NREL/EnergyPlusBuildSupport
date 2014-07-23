@@ -348,7 +348,7 @@
                 OutArgs(12:)=InArgs(11:)
                 CurArgs = CurArgs + 1
       
-              CASE('PLANTLOOP')
+              CASE('PLANTLOOP', 'CONDENSERLOOP')
                 nodiff=.false.
                 CALL GetNewObjectDefInIDD(ObjectName,NwNUmArgs,NwAorN,NwReqFld,NwObjMinFlds,NwFldNames,NwFldDefaults,NwFldUnits)
                 ! assign the entire contents of IN to OUT to start
