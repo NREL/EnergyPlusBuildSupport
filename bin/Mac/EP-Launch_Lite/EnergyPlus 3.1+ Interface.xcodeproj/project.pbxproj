@@ -152,9 +152,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4E446D880730980800EF95E7 /* EP-Launch Lite 8.1.0 */ = {
+		4E446D880730980800EF95E7 /* EP-Launch Lite 8.2.0 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4E4B5FCD08859351007FFB18 /* Build configuration list for PBXNativeTarget "EP-Launch Lite 8.1.0" */;
+			buildConfigurationList = 4E4B5FCD08859351007FFB18 /* Build configuration list for PBXNativeTarget "EP-Launch Lite 8.2.0" */;
 			buildPhases = (
 				4E446D890730980800EF95E7 /* Headers */,
 				4E446D8A0730980800EF95E7 /* Resources */,
@@ -167,7 +167,7 @@
 			);
 			dependencies = (
 			);
-			name = "EP-Launch Lite 8.1.0";
+			name = "EP-Launch Lite 8.2.0";
 			productInstallPath = "$(HOME)/Applications";
 			productName = Application;
 			productReference = 4E446D970730980900EF95E7 /* EP-Launch Lite.app */;
@@ -193,7 +193,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4E446D880730980800EF95E7 /* EP-Launch Lite 8.1.0 */,
+				4E446D880730980800EF95E7 /* EP-Launch Lite 8.2.0 */,
 			);
 		};
 /* End PBXProject section */
@@ -318,7 +318,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4E4B5FCD08859351007FFB18 /* Build configuration list for PBXNativeTarget "EP-Launch Lite 8.1.0" */ = {
+		4E4B5FCD08859351007FFB18 /* Build configuration list for PBXNativeTarget "EP-Launch Lite 8.2.0" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4E4B5FCE08859351007FFB18 /* Debug */,

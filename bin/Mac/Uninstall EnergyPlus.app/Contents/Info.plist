@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>applet</string>
 	<key>CFBundleInfoDictionaryVersion</key>
-	<string>8.0</string>
+	<string>8.2</string>
 	<key>CFBundleName</key>
 	<string>Uninstall EnergyPlus</string>
 	<key>CFBundlePackageType</key>

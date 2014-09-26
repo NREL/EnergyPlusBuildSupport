@@ -13,13 +13,13 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.buildingsynergies.interface.EnergyPlus</string>
 	<key>CFBundleInfoDictionaryVersion</key>
-	<string>8.1</string>
+	<string>8.2</string>
 	<key>CFBundleName</key>
 	<string>EP-Launch Lite</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>8.1.0 (beta)</string>
+	<string>8.2.0 (beta)</string>
 	<key>CFBundleSignature</key>
 	<string>NREL</string>
 	<key>DTCompiler</key>
