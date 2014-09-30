@@ -155,3 +155,35 @@
 9/29/2014 10:30:00 AM :   Total number of files skipped : 0
 9/29/2014 10:30:00 AM :   Total deleted files : 0
 9/29/2014 10:30:00 AM : Index build successful.
+
+9/30/2014 2:52:51 PM : Starting rebuild of Index : C:\Data\Projects\EPlus\Document\pdf V8.2\index.pdx
+9/30/2014 2:52:51 PM : Deleting files from current index
+9/30/2014 2:52:51 PM : Deleting : C:\Data\Projects\EPlus\Document\pdf V8.2\index\index.idx
+9/30/2014 2:52:51 PM : Deleting : C:\Data\Projects\EPlus\Document\pdf V8.2\index\index1.idx
+9/30/2014 2:52:51 PM : Searching : C:\Data\Projects\EPlus\Document\pdf V8.2\
+9/30/2014 2:52:53 PM : Indexing 17 files
+9/30/2014 2:52:53 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\Acknowledgments.pdf
+9/30/2014 2:52:53 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\appguidemenu.pdf
+9/30/2014 2:52:53 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\AuxiliaryPrograms.pdf
+9/30/2014 2:52:56 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\devguidemenu.pdf
+9/30/2014 2:52:56 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\EMS_Application_Guide.pdf
+9/30/2014 2:52:58 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\EngineeringReference.pdf
+9/30/2014 2:53:32 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\EPlusMainMenu.pdf
+9/30/2014 2:53:32 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\ExternalInterfaces_Application_Guide.pdf
+9/30/2014 2:53:33 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\GettingStarted.pdf
+9/30/2014 2:53:33 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\InputOutputReference.pdf
+9/30/2014 2:54:12 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\InterfaceDeveloper.pdf
+9/30/2014 2:54:12 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\ModuleDeveloper.pdf
+9/30/2014 2:54:14 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\OutputDetailsAndExamples.pdf
+9/30/2014 2:54:17 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\PlantApplicationGuide.pdf
+9/30/2014 2:54:18 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\ProgrammingStandard.pdf
+9/30/2014 2:54:18 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\Tips_and_Tricks_Using_EnergyPlus.pdf
+9/30/2014 2:54:19 PM : Extracting : C:\Data\Projects\EPlus\Document\pdf V8.2\Using_EnergyPlus_for_Compliance.pdf
+9/30/2014 2:54:19 PM : Creating Index
+9/30/2014 2:54:21 PM :   Total PDF files in all directories : 17
+9/30/2014 2:54:21 PM :   Total PDF attachments : 0
+9/30/2014 2:54:21 PM :   Total new files : 17
+9/30/2014 2:54:21 PM :   Total pages indexed : 4800
+9/30/2014 2:54:21 PM :   Total number of files skipped : 0
+9/30/2014 2:54:21 PM :   Total deleted files : 0
+9/30/2014 2:54:21 PM : Index build successful.
