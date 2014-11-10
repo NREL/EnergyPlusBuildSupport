@@ -432,3 +432,31 @@ Me.Hide
 eplUI.viewQuickOpenPanel = False
 Cancel = True
 End Sub
+
+
+'     NOTICE
+'
+'     The contents of this file are subject to the EnergyPlus Open Source License 
+'     Version 1.0 (the "License"); you may not use this file except in compliance 
+'     with the License. You may obtain a copy of the License at 
+'
+'     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
+'
+'     Software distributed under the License is distributed on an "AS IS" basis, 
+'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for 
+'     the specific language governing rights and limitations under the License. 
+'
+'     Copyright © 1996-2014 GARD Analytics.  All rights reserved.
+'
+'     NOTICE: The U.S. Government is granted for itself and others acting on its
+'     behalf a paid-up, nonexclusive, irrevocable, worldwide license in this data to
+'     reproduce, prepare derivative works, and perform publicly and display publicly.
+'     Beginning five (5) years after permission to assert copyright is granted,
+'     subject to two possible five year renewals, the U.S. Government is granted for
+'     itself and others acting on its behalf a paid-up, non-exclusive, irrevocable
+'     worldwide license in this data to reproduce, prepare derivative works,
+'     distribute copies to the public, perform publicly and display publicly, and to
+'     permit others to do so.
+'
+'     TRADEMARKS: EnergyPlus is a trademark of the US Department of Energy.
+'
