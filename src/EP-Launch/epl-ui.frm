@@ -3116,6 +3116,7 @@ Dim historyLine As String
 Dim egFL As Integer
 Dim outFN As Integer
 Dim i As Integer
+On Error Resume Next
 inName = simQueue(simQueueIndex).nameIn
 grpName = simQueue(simQueueIndex).nameGrp
 outName = simQueue(simQueueIndex).nameOut
