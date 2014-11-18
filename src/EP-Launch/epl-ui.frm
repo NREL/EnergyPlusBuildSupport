@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form eplUI 
    BorderStyle     =   1  'Fixed Single
@@ -2895,10 +2895,14 @@ End If
 If checkIfInternationalFileName(outName) Then
   passedOutFileName = ShortName(outName)
   Debug.Print "                  short: "; passedOutFileName
+  If passedOutFileName = "" Then
+    passedOutFileName = NoExtension(passedInputFileName) 'this is a workaround and may not always work
+  End If
 Else
   passedOutFileName = outName
 End If
 simQueue(simQueueIndex).usedOutFileName = passedOutFileName
+
 ' call the routine that ensures that the path with all directories exists.
 Call makeSubdir(outName)
 ' if international weather file name then use the short file name
@@ -3112,6 +3116,7 @@ Dim historyLine As String
 Dim egFL As Integer
 Dim outFN As Integer
 Dim i As Integer
+On Error Resume Next
 inName = simQueue(simQueueIndex).nameIn
 grpName = simQueue(simQueueIndex).nameGrp
 outName = simQueue(simQueueIndex).nameOut
@@ -3866,6 +3871,7 @@ frameUtility.Left = -30000
 'hide the check for updates lable
 lblCheckingUpdates.Visible = False
 'parse the command line
+Debug.Print "CommandLine: ", Command
 longCommand = GetLongFileName(Command)
 If longCommand = "\" Then longCommand = ""
 'debugging msgbox for command line issues
@@ -4555,25 +4561,29 @@ Public Function GetLongFileName(ByVal ShortFileName As String) As String
     Dim intPos As Integer
     Dim strLongFileName As String
     Dim strDirName As String
-    'Format the filename for later processing
-    ShortFileName = ShortFileName & "\"
-    'Grab the position of the first real slash
-    intPos = InStr(4, ShortFileName, "\")
-    'Loop round all the directories and files
-    'in ShortFileName, grabbing the full names
-    'of everything within it.
-    While intPos
-        strDirName = dir(Left(ShortFileName, intPos - 1), _
-            vbNormal + vbHidden + vbSystem + vbDirectory)
-        If strDirName = "" Then
-            GetLongFileName = ""
-            Exit Function
-        End If
-        strLongFileName = strLongFileName & "\" & strDirName
-        intPos = InStr(intPos + 1, ShortFileName, "\")
-    Wend
-    'Return the completed long file name
-    GetLongFileName = Left(ShortFileName, 2) & strLongFileName
+    If checkIfFileExists(ShortFileName) Then
+        'Format the filename for later processing
+        ShortFileName = ShortFileName & "\"
+        'Grab the position of the first real slash
+        intPos = InStr(4, ShortFileName, "\")
+        'Loop round all the directories and files
+        'in ShortFileName, grabbing the full names
+        'of everything within it.
+        While intPos
+            strDirName = dir(Left(ShortFileName, intPos - 1), _
+                vbNormal + vbHidden + vbSystem + vbDirectory)
+            If strDirName = "" Then
+                GetLongFileName = ""
+                Exit Function
+            End If
+            strLongFileName = strLongFileName & "\" & strDirName
+            intPos = InStr(intPos + 1, ShortFileName, "\")
+        Wend
+        'Return the completed long file name
+        GetLongFileName = Left(ShortFileName, 2) & strLongFileName
+    Else
+        GetLongFileName = ShortFileName
+    End If
 End Function
 
 '=======================================================
@@ -4637,6 +4647,17 @@ End Sub
 ' Returns flag to true if the file name
 ' or path includes an international character
 ' (above ASCII 127)
+'
+' Note:
+' On some systems 8.3 files names are not available
+' on specific drive letters. To fix this, use the following
+' command in a CMD session with ADMINSTRATOR rights:
+'
+'   fsutil 8dot3name set c: 0
+'
+' Where c: is the drive letter. This will only create 8.3 filenames
+' for files and directories after this. Existing ones will not be created
+' automatically. To test if 8.3 file names are availabe use dir/x
 '=======================================================
 Function checkIfInternationalFileName(fileNameWithPath As String) As Boolean
 Dim i As Integer
@@ -6760,15 +6781,15 @@ End Sub
 
 '     NOTICE
 '
-'     The contents of this file are subject to the EnergyPlus Open Source License 
-'     Version 1.0 (the "License"); you may not use this file except in compliance 
-'     with the License. You may obtain a copy of the License at 
+'     The contents of this file are subject to the EnergyPlus Open Source License
+'     Version 1.0 (the "License"); you may not use this file except in compliance
+'     with the License. You may obtain a copy of the License at
 '
 '     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
 '
-'     Software distributed under the License is distributed on an "AS IS" basis, 
-'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for 
-'     the specific language governing rights and limitations under the License. 
+'     Software distributed under the License is distributed on an "AS IS" basis,
+'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+'     the specific language governing rights and limitations under the License.
 '
 '     Copyright © 1996-2014 GARD Analytics.  All rights reserved.
 '
