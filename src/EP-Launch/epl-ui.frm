@@ -6601,7 +6601,7 @@ If doCheck Then
     End If
   Next i
   'check if any new anchors (updates) are available
-  If firstNewAnchor <> "" Or Not foundOldAnchor Then
+  If (firstNewAnchor <> "" Or Not foundOldAnchor) And pageText <> "" Then
     response = MsgBox("An update to the EnergyPlus simulation program, files, or utilities is now available." & _
                       vbCrLf & vbCrLf & "Would you like to review the updates available?", vbYesNo + vbCritical, "Check for Updates")
     If response = vbYes Then
