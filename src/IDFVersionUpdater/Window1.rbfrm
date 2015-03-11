@@ -1,20 +1,22 @@
 #tag Window
 Begin Window Window1
-   BackColor       =   &hFFFFFF
-   Backdrop        =   ""
+   BackColor       =   &cFFFFFF00
+   Backdrop        =   0
    CloseButton     =   True
+   Compatibility   =   ""
    Composite       =   False
    Frame           =   0
    FullScreen      =   False
+   FullScreenButton=   False
    HasBackColor    =   False
-   Height          =   2.0e+2
+   Height          =   200
    ImplicitInstance=   True
    LiveResize      =   True
    MacProcID       =   0
    MaxHeight       =   200
    MaximizeButton  =   False
    MaxWidth        =   32000
-   MenuBar         =   ""
+   MenuBar         =   0
    MenuBarVisible  =   True
    MinHeight       =   200
    MinimizeButton  =   True
@@ -23,13 +25,14 @@ Begin Window Window1
    Resizeable      =   True
    Title           =   "IDF Version Updater"
    Visible         =   True
-   Width           =   6.62e+2
+   Width           =   662
    Begin TextField txtFileName
-      AcceptTabs      =   ""
+      AcceptTabs      =   False
       Alignment       =   0
       AutoDeactivate  =   True
-      BackColor       =   &hFFFFFF
-      Bold            =   ""
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
       Border          =   True
       CueText         =   ""
       DataField       =   ""
@@ -39,28 +42,28 @@ Begin Window Window1
       Height          =   24
       HelpTag         =   "The text field shows the file selected when the CHOOSE FILE TO UPDATE button is pressed and a IDF, IDM or LST file is selected."
       Index           =   -2147483648
-      Italic          =   ""
+      Italic          =   False
       Left            =   20
       LimitText       =   0
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   True
       LockTop         =   True
       Mask            =   ""
-      Password        =   ""
+      Password        =   False
       ReadOnly        =   False
       Scope           =   0
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
-      TextColor       =   &h000000
+      TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   0
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   47
-      Underline       =   ""
+      Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
       Width           =   622
@@ -68,7 +71,7 @@ Begin Window Window1
    Begin BevelButton cmdChooseFile
       AcceptFocus     =   False
       AutoDeactivate  =   True
-      BackColor       =   "&c000000"
+      BackColor       =   &c00000000
       Bevel           =   0
       Bold            =   False
       ButtonType      =   0
@@ -81,7 +84,7 @@ Begin Window Window1
       HasMenu         =   0
       Height          =   27
       HelpTag         =   "By pressing this button you can choose an IDF, an IMF, or a LST file. The file that you selected will be shown in the large text box below. When an IDF or IMF file is selected the current version of the file will be shown in the CURRENT VERSION box.  For an LST file, the CURRENT VERSION is not used. The LST file contains a list of IDF or IMF files, one per line, with full paths."
-      Icon            =   ""
+      Icon            =   0
       IconAlign       =   0
       IconDX          =   0
       IconDY          =   0
@@ -89,19 +92,19 @@ Begin Window Window1
       InitialParent   =   ""
       Italic          =   False
       Left            =   20
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   ""
+      LockRight       =   False
       LockTop         =   True
       MenuValue       =   0
       Scope           =   0
       TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
-      TextColor       =   "&c000000"
+      TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   ""
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   14
       Underline       =   False
@@ -112,7 +115,7 @@ Begin Window Window1
    Begin BevelButton cmdConvert
       AcceptFocus     =   False
       AutoDeactivate  =   True
-      BackColor       =   &h000000
+      BackColor       =   &c00000000
       Bevel           =   0
       Bold            =   False
       ButtonType      =   0
@@ -125,7 +128,7 @@ Begin Window Window1
       HasMenu         =   0
       Height          =   27
       HelpTag         =   "Press this button to update the selected file shown above to the version shown in NEW VERSION. The file can be selected by pressing the CHOOSE FILE TO UPDATE button. After this button is pressed, the PROCESSING message is shown. It may take up to a minute to update the file depending on the CURRENT VERSION of the file. \r\n\r\nThe original file is renamed with the word _ORIGINAL at the end of the name if DELETE ORIGINAL FILES is not checked.\r\n\r\nIf CREATE INTERMEDIATE VERSION FILES is checked then files compatible with versions between the CURRENT VERSION and NEW VERSION are kept and named ending with  _Vx-x-x in the same directory as the original file."
-      Icon            =   ""
+      Icon            =   0
       IconAlign       =   0
       IconDX          =   0
       IconDY          =   0
@@ -136,16 +139,16 @@ Begin Window Window1
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   ""
+      LockRight       =   False
       LockTop         =   False
       MenuValue       =   0
       Scope           =   0
       TabIndex        =   2
       TabPanelIndex   =   0
       TabStop         =   True
-      TextColor       =   &h000000
+      TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   ""
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   153
       Underline       =   False
@@ -156,7 +159,7 @@ Begin Window Window1
    Begin BevelButton cmdExit
       AcceptFocus     =   False
       AutoDeactivate  =   True
-      BackColor       =   &h000000
+      BackColor       =   &c00000000
       Bevel           =   0
       Bold            =   False
       ButtonType      =   0
@@ -169,7 +172,7 @@ Begin Window Window1
       HasMenu         =   0
       Height          =   27
       HelpTag         =   "Press this button to exit the program."
-      Icon            =   ""
+      Icon            =   0
       IconAlign       =   0
       IconDX          =   0
       IconDY          =   0
@@ -187,9 +190,9 @@ Begin Window Window1
       TabIndex        =   3
       TabPanelIndex   =   0
       TabStop         =   True
-      TextColor       =   &h000000
+      TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   ""
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   153
       Underline       =   False
@@ -199,7 +202,7 @@ Begin Window Window1
    End
    Begin CheckBox chkIntermediate
       AutoDeactivate  =   True
-      Bold            =   ""
+      Bold            =   False
       Caption         =   "Create Intermediate Version Files"
       DataField       =   ""
       DataSource      =   ""
@@ -208,9 +211,9 @@ Begin Window Window1
       HelpTag         =   "By checking this box, intermediate versions of the file will be saved after you press the UPDATE FILE button. This is only applicable when you are updating a file from a version of EnergyPlus that is at least two versions old. The intermediate files will be in the same directory as the updated file. The names of the intermediate files will have names that end with _Vx-x-x.idf."
       Index           =   -2147483648
       InitialParent   =   ""
-      Italic          =   ""
+      Italic          =   False
       Left            =   413
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   True
@@ -221,17 +224,17 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
-      TextSize        =   0
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   83
-      Underline       =   ""
+      Underline       =   False
       Value           =   False
       Visible         =   True
       Width           =   229
    End
    Begin Label Label2
       AutoDeactivate  =   True
-      Bold            =   ""
+      Bold            =   False
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -239,33 +242,33 @@ Begin Window Window1
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
-      Italic          =   ""
+      Italic          =   False
       Left            =   127
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   ""
+      LockRight       =   False
       LockTop         =   True
-      Multiline       =   ""
+      Multiline       =   False
       Scope           =   0
       Selectable      =   False
       TabIndex        =   10
       TabPanelIndex   =   0
       Text            =   "New Version"
       TextAlign       =   1
-      TextColor       =   &h000000
+      TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   0
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   83
       Transparent     =   False
-      Underline       =   ""
+      Underline       =   False
       Visible         =   True
       Width           =   107
    End
    Begin Label Label3
       AutoDeactivate  =   True
-      Bold            =   ""
+      Bold            =   False
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -273,36 +276,37 @@ Begin Window Window1
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
-      Italic          =   ""
+      Italic          =   False
       Left            =   94
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   ""
+      LockRight       =   False
       LockTop         =   True
-      Multiline       =   ""
+      Multiline       =   False
       Scope           =   0
       Selectable      =   False
       TabIndex        =   12
       TabPanelIndex   =   0
       Text            =   "-->"
       TextAlign       =   1
-      TextColor       =   &h000000
+      TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   0
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   106
       Transparent     =   False
-      Underline       =   ""
+      Underline       =   False
       Visible         =   True
       Width           =   28
    End
    Begin TextField txtCurrentVersion
-      AcceptTabs      =   ""
+      AcceptTabs      =   False
       Alignment       =   0
       AutoDeactivate  =   True
-      BackColor       =   &hFFFFFF
-      Bold            =   ""
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
+      Bold            =   False
       Border          =   True
       CueText         =   ""
       DataField       =   ""
@@ -313,35 +317,35 @@ Begin Window Window1
       HelpTag         =   "This field shows the current version of the file selected and shown above."
       Index           =   -2147483648
       InitialParent   =   ""
-      Italic          =   ""
+      Italic          =   False
       Left            =   43
       LimitText       =   0
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   ""
+      LockRight       =   False
       LockTop         =   True
       Mask            =   ""
-      Password        =   ""
+      Password        =   False
       ReadOnly        =   True
       Scope           =   0
       TabIndex        =   13
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
-      TextColor       =   &h000000
+      TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   0
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   107
-      Underline       =   ""
+      Underline       =   False
       UseFocusRing    =   True
       Visible         =   True
       Width           =   39
    End
    Begin Label Label1
       AutoDeactivate  =   True
-      Bold            =   ""
+      Bold            =   False
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -349,34 +353,34 @@ Begin Window Window1
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
-      Italic          =   ""
+      Italic          =   False
       Left            =   20
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   ""
+      LockRight       =   False
       LockTop         =   True
-      Multiline       =   ""
+      Multiline       =   False
       Scope           =   0
       Selectable      =   False
       TabIndex        =   14
       TabPanelIndex   =   0
       Text            =   "Current Version"
       TextAlign       =   1
-      TextColor       =   &h000000
+      TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   0
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   83
       Transparent     =   False
-      Underline       =   ""
+      Underline       =   False
       Visible         =   True
       Width           =   95
    End
    Begin BevelButton cmdViewAudit
       AcceptFocus     =   False
       AutoDeactivate  =   True
-      BackColor       =   &h000000
+      BackColor       =   &c00000000
       Bevel           =   0
       Bold            =   False
       ButtonType      =   0
@@ -389,7 +393,7 @@ Begin Window Window1
       HasMenu         =   0
       Height          =   27
       HelpTag         =   "By pressing this button, the .audit file is shown. The .audit file shows a log of the file updating process including any problems encountered during the process."
-      Icon            =   ""
+      Icon            =   0
       IconAlign       =   0
       IconDX          =   0
       IconDY          =   0
@@ -407,9 +411,9 @@ Begin Window Window1
       TabIndex        =   15
       TabPanelIndex   =   0
       TabStop         =   True
-      TextColor       =   &h000000
+      TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   ""
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   153
       Underline       =   False
@@ -419,7 +423,7 @@ Begin Window Window1
    End
    Begin CheckBox chkDeleteOrig
       AutoDeactivate  =   True
-      Bold            =   ""
+      Bold            =   False
       Caption         =   "Delete Original Files"
       DataField       =   ""
       DataSource      =   ""
@@ -428,9 +432,9 @@ Begin Window Window1
       HelpTag         =   "By checking this box when the UPDATE FILE is pressed the original file is not saved but instead is deleted after the updating is complete."
       Index           =   -2147483648
       InitialParent   =   ""
-      Italic          =   ""
+      Italic          =   False
       Left            =   413
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   True
@@ -441,17 +445,17 @@ Begin Window Window1
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
-      TextSize        =   0
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   107
-      Underline       =   ""
+      Underline       =   False
       Value           =   False
       Visible         =   True
       Width           =   150
    End
    Begin PopupMenu pmnuNewVersion
       AutoDeactivate  =   True
-      Bold            =   ""
+      Bold            =   False
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -460,29 +464,29 @@ Begin Window Window1
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   ""
-      Italic          =   ""
+      Italic          =   False
       Left            =   150
       ListIndex       =   0
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   ""
+      LockRight       =   False
       LockTop         =   True
       Scope           =   0
       TabIndex        =   17
       TabPanelIndex   =   0
       TabStop         =   True
       TextFont        =   "System"
-      TextSize        =   0
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   104
-      Underline       =   ""
+      Underline       =   False
       Visible         =   True
-      Width           =   59
+      Width           =   71
    End
    Begin Label lblProcessing
       AutoDeactivate  =   True
-      Bold            =   ""
+      Bold            =   False
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -490,9 +494,9 @@ Begin Window Window1
       HelpTag         =   ""
       Index           =   -2147483648
       InitialParent   =   ""
-      Italic          =   ""
+      Italic          =   False
       Left            =   196
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   False
@@ -504,20 +508,20 @@ Begin Window Window1
       TabPanelIndex   =   0
       Text            =   "Processing"
       TextAlign       =   0
-      TextColor       =   &hFF0000
+      TextColor       =   &c0000FF00
       TextFont        =   "System"
-      TextSize        =   0
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   130
       Transparent     =   False
-      Underline       =   ""
+      Underline       =   False
       Visible         =   False
       Width           =   446
    End
    Begin BevelButton cmdAbout
       AcceptFocus     =   False
       AutoDeactivate  =   True
-      BackColor       =   "&c000000"
+      BackColor       =   &c00000000
       Bevel           =   0
       Bold            =   False
       ButtonType      =   0
@@ -530,7 +534,7 @@ Begin Window Window1
       HasMenu         =   0
       Height          =   22
       HelpTag         =   ""
-      Icon            =   ""
+      Icon            =   0
       IconAlign       =   0
       IconDX          =   0
       IconDY          =   0
@@ -538,7 +542,7 @@ Begin Window Window1
       InitialParent   =   ""
       Italic          =   False
       Left            =   592
-      LockBottom      =   ""
+      LockBottom      =   False
       LockedInPosition=   False
       LockLeft        =   False
       LockRight       =   True
@@ -548,9 +552,9 @@ Begin Window Window1
       TabIndex        =   19
       TabPanelIndex   =   0
       TabStop         =   True
-      TextColor       =   "&c000000"
+      TextColor       =   &c00000000
       TextFont        =   "System"
-      TextSize        =   ""
+      TextSize        =   0.0
       TextUnit        =   0
       Top             =   7
       Underline       =   False
@@ -878,7 +882,11 @@ End
 		  dim newVersionWithDashes as String
 		  dim oldVersionWithDashes as String
 		  
-		  transFolder = app.ExecutableFile.Parent
+		  #if TargetMacOS
+		    transFolder = app.ExecutableFile.Parent.Parent.Parent.Parent
+		  #else
+		    transFolder = app.ExecutableFile.Parent
+		  #endif
 		  #if DebugBuild then
 		    transFolder = transFolder.Parent
 		  #endif
@@ -1123,8 +1131,8 @@ End
 		  end if
 		  me.MouseCursor = system.Cursors.StandardPointer
 		  
-		Exception
-		  MsgBox "File not found (c): " + curLine
+		  Exception
+		    MsgBox "File not found (c): " + curLine
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1132,6 +1140,7 @@ End
 	#tag Event
 		Sub Action()
 		  close()
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1159,8 +1168,8 @@ End
 	#tag Event
 		Sub Action()
 		  dim t as String
-		  t = "IDF Version Updater - Version 0.12" + EndOfLine+ EndOfLine
-		  t = t + "Copyright (c) 2011 GARD Analytics, All rights reserved." + EndOfLine+ EndOfLine
+		  t = "IDF Version Updater - Version 0.13" + EndOfLine+ EndOfLine
+		  t = t + "Copyright (c) 2011-2015 GARD Analytics, All rights reserved." + EndOfLine+ EndOfLine
 		  t = t + "NOTICE: The U.S. Government is granted for itself and others acting on its behalf a paid-up, nonexclusive, irrevocable, worldwide license in this data to reproduce, prepare derivativeworks, and perform publicly and display publicly. Beginning five (5) years after permission to assert copyright is granted, subject to two possible five year renewals, the U.S. Government is granted for itself and others acting on its behalf a paid-up, non-exclusive,irrevocable worldwide license in this data to reproduce, prepare derivative works, distribute copies to the public,perform publicly and display publicly,and to permit others to do so." + EndOfLine+ EndOfLine
 		  t = t + "TRADEMARKS: EnergyPlus, DOE-2.1E, DOE-2, and DOE are trademarks of the US Department of Energy." + EndOfLine+ EndOfLine
 		  t = t + "DISCLAIMER OF WARRANTY AND LIMITATION OF LIABILITY: THIS SOFTWARE IS PROVIDED 'AS IS' WITHOUT WARRANTY OF ANY KIND. NEITHER GARD ANALYTICS, THE DEPARTMENT OF ENERGY, THE US GOVERNMENT, THEIR LICENSORS, OR ANY PERSON OR ORGANIZATION ACTING ON BEHALF OF ANY OF THEM:" + EndOfLine+ EndOfLine
