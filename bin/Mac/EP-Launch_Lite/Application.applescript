@@ -35,7 +35,7 @@ on clicked theObject
 		if inputFileButtonClicked then
 			set theTitle to "Select Input File"
 			set theFileTypes to "idf, imf" as string
-			set theDirectory to "/Applications/EnergyPlus-8-2-0/ExampleFiles" as string
+			set theDirectory to "/Applications/EnergyPlus-8-3-0/ExampleFiles" as string
 			
 			-- Convert the comma separated list of file type to an actual list
 			set AppleScript's text item delimiters to ", "
@@ -94,7 +94,7 @@ end launched
 on buildWeatherFilePopUp()
 	show window "main"
 	set weather_files to {"-- none --"}
-	set x to ((path to applications folder) as string) & "EnergyPlus-8-2-0:WeatherData"
+	set x to ((path to applications folder) as string) & "EnergyPlus-8-3-0:WeatherData"
 	repeat with each_file in list folder (x)
 		if each_file ends with ".epw" then
 			set end of weather_files to contents of (each_file as string)
