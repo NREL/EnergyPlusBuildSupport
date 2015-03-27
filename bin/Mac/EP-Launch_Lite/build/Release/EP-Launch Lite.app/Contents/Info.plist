@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>EnergyPlus</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.buildingsynergies.interface.EnergyPlus</string>
+	<string>${MACOSX_BUNDLE_GUI_IDENTIFIER}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>8.3</string>
 	<key>CFBundleName</key>
