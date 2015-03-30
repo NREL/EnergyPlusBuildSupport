@@ -12,14 +12,10 @@
 	<string>EnergyPlus</string>
 	<key>CFBundleIdentifier</key>
 	<string>${MACOSX_BUNDLE_GUI_IDENTIFIER}</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>8.3</string>
 	<key>CFBundleName</key>
 	<string>EP-Launch Lite</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>8.3.0 (beta)</string>
 	<key>CFBundleSignature</key>
 	<string>NREL</string>
 	<key>DTCompiler</key>
