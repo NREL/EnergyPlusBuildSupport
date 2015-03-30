@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form eplUI 
    BorderStyle     =   1  'Fixed Single
@@ -1286,39 +1286,51 @@ Begin VB.Form eplUI
       End
       Begin VB.Menu mnuHelpGettingStarted 
          Caption         =   "EnergyPlus Getting Started"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpIORef 
          Caption         =   "EnergyPlus Input/Output Reference"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpOutDetails 
          Caption         =   "EnergyPlus Output Details and Examples"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpEngRef 
          Caption         =   "EnergyPlus Engineering Reference"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAuxProgs 
          Caption         =   "EnergyPlus Auxiliary Programs"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpPlantAppl 
          Caption         =   "Application Guide for Plant Loops"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpEMS 
          Caption         =   "Application Guide for EMS"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpCompliance 
          Caption         =   "Using EnergyPlus for Compliance"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpExtInterface 
          Caption         =   "External Interface Application Guide"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpTips 
          Caption         =   "Tips and Tricks Using EnergyPlus"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAcknowledge 
          Caption         =   "EnergyPlus Acknowledgments"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpDiv2 
          Caption         =   "-"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpCheckUpdates 
          Caption         =   "Check for Updates..."
@@ -2211,7 +2223,8 @@ Private Sub mnuHelpAbout_Click()
 frmAbout.Show
 End Sub
 Private Sub mnuHelpEPDocs_Click()
-Call startAcrobat("EPlusMainMenu.pdf")
+'Call startAcrobat("EPlusMainMenu.pdf")
+Call viewWebPage(appPath & "Documentation\index.html")
 End Sub
 Private Sub mnuHelpGettingStarted_Click()
 Call startAcrobat("GettingStarted.pdf")
