@@ -6,7 +6,7 @@ Begin VB.MDIForm parentMDI
    Caption         =   "IDF Editor"
    ClientHeight    =   8460
    ClientLeft      =   165
-   ClientTop       =   855
+   ClientTop       =   750
    ClientWidth     =   13065
    Icon            =   "MDI-Parent.frx":0000
    LinkTopic       =   "MDIForm1"
@@ -141,36 +141,47 @@ Begin VB.MDIForm parentMDI
       End
       Begin VB.Menu mnuHelpGettingStarted 
          Caption         =   "EnergyPlus Getting Started"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpIORef 
          Caption         =   "EnergyPlus I/O Reference"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpOutDetails 
          Caption         =   "EnergyPlus Output Details and Examples"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpEngRef 
          Caption         =   "EnergyPlus Engineering Reference"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAuxProgs 
          Caption         =   "EnergyPlus Auxiliary Programs"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpEMSguide 
          Caption         =   "EnergyPlus EMS Application Guide"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpCompliance 
          Caption         =   "Using EnergyPlus for Compliance"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpExtInterface 
          Caption         =   "External Interface Application Guide "
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpTips 
          Caption         =   "Tips and Tricks Using EnergyPlus"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAcknowledge 
          Caption         =   "EnergyPlus Acknowledgments"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpDiv3 
          Caption         =   "-"
+         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAbout 
          Caption         =   "About IDF Editor"
@@ -219,6 +230,7 @@ Else
 End If
 Call ReadIDD
 Call findAcrobat
+Call findWebBrowser
 Call retrieveSettings
 sbStatusBar.Panels(1).Text = IDDFileName
 If useSpecialIDD Then
@@ -599,7 +611,8 @@ Private Sub mnuHelpEngRef_Click()
 Call startAcrobat("EngineeringReference.pdf")
 End Sub
 Private Sub mnuHelpEPDocs_Click()
-Call startAcrobat("EPlusMainMenu.pdf")
+'Call startAcrobat("EPlusMainMenu.pdf")
+Call viewWebPage(documentationPath + "index.html")
 End Sub
 Private Sub mnuHelpGettingStarted_Click()
 Call startAcrobat("GettingStarted.pdf")
@@ -628,15 +641,15 @@ End Sub
 
 '     NOTICE
 '
-'     The contents of this file are subject to the EnergyPlus Open Source License 
-'     Version 1.0 (the "License"); you may not use this file except in compliance 
-'     with the License. You may obtain a copy of the License at 
+'     The contents of this file are subject to the EnergyPlus Open Source License
+'     Version 1.0 (the "License"); you may not use this file except in compliance
+'     with the License. You may obtain a copy of the License at
 '
 '     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
 '
-'     Software distributed under the License is distributed on an "AS IS" basis, 
-'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for 
-'     the specific language governing rights and limitations under the License. 
+'     Software distributed under the License is distributed on an "AS IS" basis,
+'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+'     the specific language governing rights and limitations under the License.
 '
 '     Copyright © 1996-2014 GARD Analytics.  All rights reserved.
 '

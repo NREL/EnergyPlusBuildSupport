@@ -322,7 +322,8 @@ Public nodeNameDialog() As nodeNameDialogType
 Public maxNodeNameDialog As Long
 Public sizeNodeNameDialog As Long
 
-  
+Public htmlViewFileName As String
+ 
 
 Private Declare Function FindExecutable Lib "shell32.dll" Alias "FindExecutableA" (ByVal lpFile As String, ByVal lpDirectory As String, ByVal lpresults As String) As Long
 Private Declare Function GetShortPathName Lib "kernel32.dll" Alias "GetShortPathNameA" (ByVal lpszLongPath As String, ByVal lpszShortPath As String, ByVal cchBuffer As Long) As Long
@@ -2039,6 +2040,19 @@ Debug.Print "Acrobat["; acrobatReaderFileName; "]"
 End Sub
 
 
+'=======================================================
+' Find the web browser program
+'=======================================================
+Sub findWebBrowser()
+Dim arFN As String
+Debug.Print "DocumentationPath["; documentationPath; "]"
+arFN = String(250, 0)
+Call FindExecutable(documentationPath & "index.html", vbNullString, arFN)
+htmlViewFileName = Left(arFN, InStr(arFN, vbNullChar) - 1) 'clean up
+Debug.Print "Webbrowser["; htmlViewFileName; "]"
+End Sub
+
+
 '-----------------------------------------------------------------------------
 ' Parse a Line with Comma Separation using SPLIT
 '-----------------------------------------------------------------------------
@@ -2326,17 +2340,40 @@ Next i
 RemoveTrailingTabs = Trim(outString) 'remove spaces that were tabs
 End Function
 
+'=======================================================
+' View a web page given the full URL as the input parameter
+'=======================================================
+Sub viewWebPage(page As String)
+Dim q As String
+Dim cl As String
+q = Chr(34)
+If htmlViewFileName = "" Then
+  Exit Sub
+End If
+On Error Resume Next
+Err.Clear
+If Err.Number = 0 Then
+    cl = htmlViewFileName & " " & q & page & q
+    Debug.Print cl
+    Shell cl, vbNormalFocus
+    If Err.Number <> 0 Then
+        MsgBox "Error initiating HTML browser. This is likely due to the HTML browser program being deleted or moved. Please go to VIEW OPTIONS to select a new HTML BROWSER program.", vbExclamation, "Edit Cancelled"
+        Exit Sub
+    End If
+End If
+End Sub
+
 '     NOTICE
 '
-'     The contents of this file are subject to the EnergyPlus Open Source License 
-'     Version 1.0 (the "License"); you may not use this file except in compliance 
-'     with the License. You may obtain a copy of the License at 
+'     The contents of this file are subject to the EnergyPlus Open Source License
+'     Version 1.0 (the "License"); you may not use this file except in compliance
+'     with the License. You may obtain a copy of the License at
 '
 '     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
 '
-'     Software distributed under the License is distributed on an "AS IS" basis, 
-'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for 
-'     the specific language governing rights and limitations under the License. 
+'     Software distributed under the License is distributed on an "AS IS" basis,
+'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+'     the specific language governing rights and limitations under the License.
 '
 '     Copyright © 1996-2014 GARD Analytics.  All rights reserved.
 '

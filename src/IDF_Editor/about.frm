@@ -81,7 +81,7 @@ Begin VB.Form About
       Begin VB.Label lblVersion 
          Alignment       =   1  'Right Justify
          AutoSize        =   -1  'True
-         Caption         =   "Version 1.45a"
+         Caption         =   "Version 1.46"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   12
@@ -92,10 +92,10 @@ Begin VB.Form About
             Strikethrough   =   0   'False
          EndProperty
          Height          =   285
-         Left            =   1575
+         Left            =   1710
          TabIndex        =   1
          Top             =   960
-         Width           =   1545
+         Width           =   1410
       End
       Begin VB.Label lblProductName 
          AutoSize        =   -1  'True
@@ -151,7 +151,7 @@ End Sub
 
 Private Sub Form_Load()
 lblAboutEPVer.Caption = "EnergyPlus and IDD version number: " & IDDVersion
-txtNotice.Text = "Copyright (c) 2000-2013 GARD Analytics, " & vbCrLf
+txtNotice.Text = "Copyright (c) 2000-2015 GARD Analytics, " & vbCrLf
 txtNotice.Text = txtNotice.Text & "Inc.  All rights reserved." & vbCrLf
 txtNotice.Text = txtNotice.Text & "                                        " & vbCrLf
 txtNotice.Text = txtNotice.Text & "The code for quick select dropdowns     " & vbCrLf
@@ -235,15 +235,15 @@ End Sub
 
 '     NOTICE
 '
-'     The contents of this file are subject to the EnergyPlus Open Source License 
-'     Version 1.0 (the "License"); you may not use this file except in compliance 
-'     with the License. You may obtain a copy of the License at 
+'     The contents of this file are subject to the EnergyPlus Open Source License
+'     Version 1.0 (the "License"); you may not use this file except in compliance
+'     with the License. You may obtain a copy of the License at
 '
 '     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
 '
-'     Software distributed under the License is distributed on an "AS IS" basis, 
-'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for 
-'     the specific language governing rights and limitations under the License. 
+'     Software distributed under the License is distributed on an "AS IS" basis,
+'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+'     the specific language governing rights and limitations under the License.
 '
 '     Copyright © 1996-2014 GARD Analytics.  All rights reserved.
 '
