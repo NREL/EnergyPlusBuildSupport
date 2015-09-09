@@ -43,130 +43,6 @@ Begin VB.Form eplUI
          TabIndex        =   12
          Top             =   3000
          Width           =   8295
-         Begin VB.Frame frameViewSelectOut 
-            BorderStyle     =   0  'None
-            Height          =   2175
-            Left            =   600
-            TabIndex        =   48
-            Top             =   360
-            Width           =   7455
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 8"
-               Height          =   375
-               Index           =   7
-               Left            =   5760
-               TabIndex        =   93
-               Top             =   1440
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 7"
-               Height          =   375
-               Index           =   6
-               Left            =   5760
-               TabIndex        =   92
-               Top             =   960
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 6"
-               Height          =   375
-               Index           =   5
-               Left            =   5760
-               TabIndex        =   91
-               Top             =   480
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 5"
-               Height          =   375
-               Index           =   4
-               Left            =   5760
-               TabIndex        =   90
-               Top             =   0
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 4"
-               Height          =   375
-               Index           =   3
-               Left            =   3960
-               TabIndex        =   89
-               Top             =   1440
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 3"
-               Height          =   375
-               Index           =   2
-               Left            =   3960
-               TabIndex        =   88
-               Top             =   960
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 2"
-               Height          =   375
-               Index           =   1
-               Left            =   3960
-               TabIndex        =   87
-               Top             =   480
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewDefine 
-               Caption         =   "Define.."
-               Height          =   315
-               Left            =   0
-               TabIndex        =   86
-               Top             =   1800
-               Width           =   855
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 1"
-               Height          =   375
-               Index           =   0
-               Left            =   3960
-               TabIndex        =   85
-               Top             =   0
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "HTML"
-               Height          =   375
-               Index           =   11
-               Left            =   1920
-               TabIndex        =   52
-               Top             =   480
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Spreadsheets"
-               Height          =   375
-               Index           =   10
-               Left            =   120
-               TabIndex        =   51
-               Top             =   480
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Drawing File"
-               Height          =   375
-               Index           =   9
-               Left            =   1920
-               TabIndex        =   50
-               Top             =   0
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Text Output Files"
-               Height          =   375
-               Index           =   8
-               Left            =   120
-               TabIndex        =   49
-               Top             =   0
-               Width           =   1700
-            End
-         End
          Begin VB.Frame frameViewAllOut 
             BorderStyle     =   0  'None
             Height          =   2175
@@ -177,11 +53,11 @@ Begin VB.Form eplUI
             Begin VB.CommandButton cmdTblXML 
                Caption         =   "Table XML"
                Height          =   255
-               Left            =   6480
+               Left            =   6360
                TabIndex        =   101
-               ToolTipText     =   "EMS Actuator List"
+               ToolTipText     =   "XML version of tabular output report which contains summarized results"
                Top             =   720
-               Width           =   900
+               Width           =   1020
             End
             Begin VB.CommandButton cmdSlabErr 
                Caption         =   "Slab Err"
@@ -213,11 +89,11 @@ Begin VB.Form eplUI
             Begin VB.CommandButton cmdBsmtCSV 
                Caption         =   "Bsmt CSV"
                Height          =   255
-               Left            =   6480
+               Left            =   6360
                TabIndex        =   97
                ToolTipText     =   "Basement preprocessor monthly ground temperatures"
                Top             =   0
-               Width           =   900
+               Width           =   1020
             End
             Begin VB.CommandButton cmdBsmtAudit 
                Caption         =   "Bsmt Audit"
@@ -519,11 +395,135 @@ Begin VB.Form eplUI
             Begin VB.CommandButton cmdEDD 
                Caption         =   "EDD"
                Height          =   255
-               Left            =   6480
+               Left            =   6360
                TabIndex        =   54
                ToolTipText     =   "EMS Actuator List"
                Top             =   360
-               Width           =   900
+               Width           =   1020
+            End
+         End
+         Begin VB.Frame frameViewSelectOut 
+            BorderStyle     =   0  'None
+            Height          =   2175
+            Left            =   600
+            TabIndex        =   48
+            Top             =   360
+            Width           =   7455
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 8"
+               Height          =   375
+               Index           =   7
+               Left            =   5760
+               TabIndex        =   93
+               Top             =   1440
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 7"
+               Height          =   375
+               Index           =   6
+               Left            =   5760
+               TabIndex        =   92
+               Top             =   960
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 6"
+               Height          =   375
+               Index           =   5
+               Left            =   5760
+               TabIndex        =   91
+               Top             =   480
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 5"
+               Height          =   375
+               Index           =   4
+               Left            =   5760
+               TabIndex        =   90
+               Top             =   0
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 4"
+               Height          =   375
+               Index           =   3
+               Left            =   3960
+               TabIndex        =   89
+               Top             =   1440
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 3"
+               Height          =   375
+               Index           =   2
+               Left            =   3960
+               TabIndex        =   88
+               Top             =   960
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 2"
+               Height          =   375
+               Index           =   1
+               Left            =   3960
+               TabIndex        =   87
+               Top             =   480
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewDefine 
+               Caption         =   "Define.."
+               Height          =   315
+               Left            =   0
+               TabIndex        =   86
+               Top             =   1800
+               Width           =   855
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 1"
+               Height          =   375
+               Index           =   0
+               Left            =   3960
+               TabIndex        =   85
+               Top             =   0
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "HTML"
+               Height          =   375
+               Index           =   11
+               Left            =   1920
+               TabIndex        =   52
+               Top             =   480
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Spreadsheets"
+               Height          =   375
+               Index           =   10
+               Left            =   120
+               TabIndex        =   51
+               Top             =   480
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Drawing File"
+               Height          =   375
+               Index           =   9
+               Left            =   1920
+               TabIndex        =   50
+               Top             =   0
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Text Output Files"
+               Height          =   375
+               Index           =   8
+               Left            =   120
+               TabIndex        =   49
+               Top             =   0
+               Width           =   1700
             End
          End
          Begin MSComctlLib.TabStrip tabViewResults 
