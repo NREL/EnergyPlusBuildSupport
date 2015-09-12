@@ -75,7 +75,7 @@ Begin VB.Form frmAbout
       Width           =   3855
    End
    Begin VB.Label lblTitle 
-      Caption         =   "EP-Launch  -  Version 2.07"
+      Caption         =   "EP-Launch  -  Version 2.08"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   12
@@ -214,3 +214,6 @@ End Sub
 '
 '     TRADEMARKS: EnergyPlus is a trademark of the US Department of Energy.
 '
+Private Sub lblTitle_Click()
+
+End Sub
