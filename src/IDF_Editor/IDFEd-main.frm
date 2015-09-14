@@ -1591,6 +1591,10 @@ If actCol >= 0 Then
         grdNew.Cell(flexcpBackColor, Row, Col) = 0
       End If
   End Select
+  ' for any type of field, if it is required and blank show that it is out of range
+  If IDDField(actField).required And Trim(IDFValue(actValue).entry) = "" Then
+    grdNew.Cell(flexcpBackColor, Row, Col) = outOfRangeColor
+  End If
 End If
 If lastKeyEnter And downWhenEnter Then
   If grdNew.Row + 1 < grdNew.Rows Then
@@ -2879,6 +2883,11 @@ Do While curObject > 0
         End If
       End If
     End If
+    ' for any type of field, if it is required and blank show that it is out of range
+    If IDDField(curField).required And Trim(grdNew.TextMatrix(j, i)) = "" Then
+      grdNew.Cell(flexcpBackColor, j, i) = outOfRangeColor
+    End If
+    
     'indicate the REQUIRED by a grey bar in each cell
     'If IDDField(curField).required Then
       'grdNew.Cell(flexcpFloodPercent, j, i) = -3
@@ -5336,6 +5345,9 @@ For iObject = 1 To maxUsedObject
             newMsg = "Invalid reference"
           End If
       End Select
+      If IDDField(fieldIndx).required And Trim(curAlphaValue) = "" Then
+        newMsg = "Blank value for required field"
+      End If
       If newMsg <> "" Then
         numValidityMsg = numValidityMsg + 1
         If numValidityMsg > sizeValidityMsg Then
@@ -5413,7 +5425,7 @@ Else
           Do While refObject > 0
             StartVal = IDFObject(refObject).valueStart
             'the following line actually adds items to the pull down list
-            If UCase(curString) = UCase(IDFValue(StartVal + deltaField).entry) Then
+            If UCase(Trim(curString)) = UCase(Trim(IDFValue(StartVal + deltaField).entry)) Then
               found = True
               Exit Do
             End If
