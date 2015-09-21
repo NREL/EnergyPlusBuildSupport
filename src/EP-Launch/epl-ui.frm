@@ -1776,6 +1776,7 @@ End Sub
 Private Sub Form_Activate()
 If firstActivateCall Then
   If updateAutoCheck Then Call checkForUpdatesNow(False)
+  Call checkIfApplicationDirectoryGood
   firstActivateCall = False
 End If
 End Sub
@@ -6790,6 +6791,39 @@ Else 'the buffer still has some text
 End If
 End Sub
 
+'=======================================================
+' Check the application directory and see if it is likely
+' to cause problems because of space or not being
+' able to write files there (such as when EnergyPlus
+' is installed in c:\program files\EnergyPlus
+'=======================================================
+Sub checkIfApplicationDirectoryGood()
+' assume it is a good directory
+Dim directoryCanBeWritten As Boolean
+Dim outFN As Integer
+Dim testFile As String
+directoryCanBeWritten = True
+Debug.Print "checkIfApplicationDirectoryGood apppath:", appPath
+On Error Resume Next
+Err.Clear
+outFN = FreeFile
+testFile = "test.bat"
+' MsgBox appPath & testFile
+Open appPath & testFile For Output As outFN
+If Err.Number <> 0 Then
+    directoryCanBeWritten = False
+End If
+Close outFN
+Kill appPath & testFile
+If Err.Number <> 0 Then
+    directoryCanBeWritten = False
+End If
+If Not directoryCanBeWritten Then
+    MsgBox "Invalid application directory:" + vbCrLf + vbCrLf + appPath + vbCrLf + vbCrLf + "You should consider uninstalling EnergyPlus and installing it in a directory such as c:\EnergyPlusVx-x-x that requires no special permission to write files.", vbInformation, "EP-Launch ERROR"
+ElseIf InStr(appPath, " ") > 0 Then
+    MsgBox "Invalid application directory:" + vbCrLf + vbCrLf + appPath + vbCrLf + vbCrLf + "You should consider uninstalling EnergyPlus and installing it in a directory such as c:\EnergyPlusVx-x-x that has no spaces in the path ", vbInformation, "EP-Launch ERROR"
+End If
+End Sub
 
 
 '     NOTICE
