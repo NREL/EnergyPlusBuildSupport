@@ -6808,12 +6808,13 @@ On Error Resume Next
 Err.Clear
 outFN = FreeFile
 testFile = "test.bat"
+' MsgBox appPath & testFile
 Open appPath & testFile For Output As outFN
 If Err.Number <> 0 Then
     directoryCanBeWritten = False
 End If
 Close outFN
-Kill testFile
+Kill appPath & testFile
 If Err.Number <> 0 Then
     directoryCanBeWritten = False
 End If
