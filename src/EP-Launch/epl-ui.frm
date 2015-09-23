@@ -3030,7 +3030,7 @@ If CreateRunEPBatch Then
   Do While Not EOF(flNum)
     Line Input #flNum, lineOfBatch
     Print #outFN, lineOfBatch
-    Debug.Print "Line of batch file: "; lineOfBatch
+    'Debug.Print "Line of batch file: "; lineOfBatch
   Loop
   Close flNum
   Close outFN
@@ -4874,17 +4874,19 @@ Dim curIDFwPath As String
 Dim numTotalRuns As Integer
 Dim currentRunCounter As Integer
 Dim currentDirectory As String
+Dim recDateTime As Date
+Dim curDateTime As Date
 'Dim oldWinTitle As String
 Dim delay As Single
 'Note that outName and grpName are optional and are only supplied when called from a group run
 
+recDateTime = Now() 'get the current date and timestamp
+recDateTime = DateAdd("n", -1, recDateTime) 'subtract one minute just to provide cushion
 'oldWinTitle = eplUI.Caption
 delay = 0.05
-'remove existing files first
 On Error Resume Next
 'MsgBox "InIDF: " & InIDFfile & vbCrLf & "InWthr: " & InWthrFile & vbCrLf & "OutName: " & outName & vbCrLf & "GrpName: " & grpName, vbInformation, "Parametric arguments"
 
-Kill NoExtension(InIDFfile) & "-*.idf"
 Err.Clear 'don't worry if files not found
 'run parametric preprocessor
 appFileName = appPath & "PreProcess\ParametricPreprocessor\ParametricPreprocessor.exe"
@@ -4927,16 +4929,19 @@ currentRunCounter = 0
 curIDF = dir(NoExtension(InIDFfile) & "-*.idf")
 curIDFwPath = pathOnly(InIDFfile) & curIDF
 Do While curIDF <> ""
-  currentRunCounter = currentRunCounter + 1
-  Call Pause(delay)
-  'eplUI.Caption = Trim(Val(currentRunCounter)) & " of " & Trim(Val(numTotalRuns)) & "   " & oldWinTitle
-  'eplUI.Refresh
-  DoEvents
-  Call Pause(delay)
-  If IsMissing(grpName) Or IsMissing(outName) Or outName = "" Or grpName = "" Then
-    Call addToSimulationQueue(curIDFwPath, InWthrFile, NoExtension(curIDFwPath), "", currentRunCounter, False)
-  Else
-    Call addToSimulationQueue(curIDFwPath, InWthrFile, pathOnly(outName) & NoExtension(curIDF), grpName, currentRunCounter, False)
+  curDateTime = FileDateTime(curIDFwPath)
+  If curDateTime > recDateTime Then 'only include files that were recently created
+    currentRunCounter = currentRunCounter + 1
+    Call Pause(delay)
+    'eplUI.Caption = Trim(Val(currentRunCounter)) & " of " & Trim(Val(numTotalRuns)) & "   " & oldWinTitle
+    'eplUI.Refresh
+    DoEvents
+    Call Pause(delay)
+    If IsMissing(grpName) Or IsMissing(outName) Or outName = "" Or grpName = "" Then
+      Call addToSimulationQueue(curIDFwPath, InWthrFile, NoExtension(curIDFwPath), "", currentRunCounter, False)
+    Else
+      Call addToSimulationQueue(curIDFwPath, InWthrFile, pathOnly(outName) & NoExtension(curIDF), grpName, currentRunCounter, False)
+    End If
   End If
   curIDF = dir
   curIDFwPath = pathOnly(InIDFfile) & curIDF 'add back the full path to the file
@@ -6820,8 +6825,8 @@ If Err.Number <> 0 Then
 End If
 If Not directoryCanBeWritten Then
     MsgBox "Invalid application directory:" + vbCrLf + vbCrLf + appPath + vbCrLf + vbCrLf + "You should consider uninstalling EnergyPlus and installing it in a directory such as c:\EnergyPlusVx-x-x that requires no special permission to write files.", vbInformation, "EP-Launch ERROR"
-ElseIf InStr(appPath, " ") > 0 Then
-    MsgBox "Invalid application directory:" + vbCrLf + vbCrLf + appPath + vbCrLf + vbCrLf + "You should consider uninstalling EnergyPlus and installing it in a directory such as c:\EnergyPlusVx-x-x that has no spaces in the path ", vbInformation, "EP-Launch ERROR"
+ElseIf InStr(appPath, " ") > 0 And Not CreateRunEPBatch Then
+    MsgBox "Invalid application directory:" + vbCrLf + vbCrLf + appPath + vbCrLf + vbCrLf + "You should consider uninstalling EnergyPlus and installing it in a directory such as c:\EnergyPlusVx-x-x that has no spaces in the path. As an alternative you can also go to VIEW .. OPTIONS .. MISCELLANEOUS and check Create Batch File to Run EnergyPlus.", vbInformation, "EP-Launch ERROR"
 End If
 End Sub
 
