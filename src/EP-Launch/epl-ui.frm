@@ -6825,8 +6825,8 @@ If Err.Number <> 0 Then
 End If
 If Not directoryCanBeWritten Then
     MsgBox "Invalid application directory:" + vbCrLf + vbCrLf + appPath + vbCrLf + vbCrLf + "You should consider uninstalling EnergyPlus and installing it in a directory such as c:\EnergyPlusVx-x-x that requires no special permission to write files.", vbInformation, "EP-Launch ERROR"
-ElseIf InStr(appPath, " ") > 0 Then
-    MsgBox "Invalid application directory:" + vbCrLf + vbCrLf + appPath + vbCrLf + vbCrLf + "You should consider uninstalling EnergyPlus and installing it in a directory such as c:\EnergyPlusVx-x-x that has no spaces in the path ", vbInformation, "EP-Launch ERROR"
+ElseIf InStr(appPath, " ") > 0 And Not CreateRunEPBatch Then
+    MsgBox "Invalid application directory:" + vbCrLf + vbCrLf + appPath + vbCrLf + vbCrLf + "You should consider uninstalling EnergyPlus and installing it in a directory such as c:\EnergyPlusVx-x-x that has no spaces in the path. As an alternative you can also go to VIEW .. OPTIONS .. MISCELLANEOUS and check Create Batch File to Run EnergyPlus.", vbInformation, "EP-Launch ERROR"
 End If
 End Sub
 
