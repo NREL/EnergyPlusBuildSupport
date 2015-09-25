@@ -2613,7 +2613,7 @@ If testViewConvertOld Then
       msg = msg & "is an old version (" & IDFversion & "). "
       msg = msg & "To update the file to the latest version ("
       msg = msg & currentVersion & ") use the IDFVersionUpdater program on the Utility tab. "
-      msg = msg & "And you may need to also download additional Transition programs from http://www.energyplus.gov/ on the Add-Ons page." & vbCrLf & vbCrLf
+      msg = msg & "And you may need to also download additional Transition programs from http://www.energyplus.net/ on the Extras page." & vbCrLf & vbCrLf
       msg = msg & "Proceed with simulation using old version?"
       If MsgBox(msg, vbOKCancel, "Check File Version") = vbCancel Then
         cancelDueToVersionCheck = True
@@ -4287,7 +4287,7 @@ If firstUse = "True" Then
   'update checking
   updateLastAnchor = ""
   updateLastDate = "1/1/2008"
-  updatePageURL = "http://energyplus.gov/update/epupdate.htm"
+  updatePageURL = "http://energyplus.net/epupdate.htm"
   updateAutoCheck = True
   Call SaveAllSettings
 Else
@@ -4462,7 +4462,7 @@ Else
   If updateLastDate = "" Then updateLastDate = "1/1/2008"
   updatePageURL = GetSetting("EP-Launch", "UpdateCheck", "CheckURL")
   'If updatePageURL = "" Then updatePageURL = "http://gard.com/ep/epupdate.htm"
-  If updatePageURL = "" Then updatePageURL = "http://energyplus.gov/update/epupdate.htm"
+  If updatePageURL = "" Then updatePageURL = "http://energyplus.net/epupdate.htm"
   If Left(GetSetting("EP-Launch", "UpdateCheck", "AutoCheck"), 1) = "F" Then
     updateAutoCheck = False
   Else
@@ -6565,7 +6565,7 @@ lblCheckingUpdates.Visible = True
 'updatePageURL = "http://gard.com/ep/epupdateCR.htm"
 'updatePageURL = "http://gard.com/ep/junk.htm"
 'updatePageURL = "http://eeredevapps1.nrel.gov/buildings/energyplus/update/epupdate.htm"
-'updatePageURL = "http://energyplus.gov/update/epupdate.htm"
+'updatePageURL = "http://energyplus.net/epupdate.htm"
 'updateLastDate = "9/2/2009 12:47:47 AM"
 '-----------------------------------------
 
@@ -6837,7 +6837,7 @@ End Sub
 '     Version 1.0 (the "License"); you may not use this file except in compliance
 '     with the License. You may obtain a copy of the License at
 '
-'     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
+'     https://energyplus.net/licensing
 '
 '     Software distributed under the License is distributed on an "AS IS" basis,
 '     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
