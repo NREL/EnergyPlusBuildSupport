@@ -147,15 +147,15 @@ End Sub
 
 '     NOTICE
 '
-'     The contents of this file are subject to the EnergyPlus Open Source License 
-'     Version 1.0 (the "License"); you may not use this file except in compliance 
-'     with the License. You may obtain a copy of the License at 
+'     The contents of this file are subject to the EnergyPlus Open Source License
+'     Version 1.0 (the "License"); you may not use this file except in compliance
+'     with the License. You may obtain a copy of the License at
 '
-'     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
+'     https://energyplus.net/licensing
 '
-'     Software distributed under the License is distributed on an "AS IS" basis, 
-'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for 
-'     the specific language governing rights and limitations under the License. 
+'     Software distributed under the License is distributed on an "AS IS" basis,
+'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+'     the specific language governing rights and limitations under the License.
 '
 '     Copyright © 1996-2014 GARD Analytics.  All rights reserved.
 '

@@ -75,7 +75,7 @@ Begin VB.Form frmAbout
       Width           =   3855
    End
    Begin VB.Label lblTitle 
-      Caption         =   "EP-Launch  -  Version 2.08b"
+      Caption         =   "EP-Launch  -  Version 2.08c"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   12
@@ -194,7 +194,7 @@ End Sub
 '     Version 1.0 (the "License"); you may not use this file except in compliance
 '     with the License. You may obtain a copy of the License at
 '
-'     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
+'     https://energyplus.net/licensing
 '
 '     Software distributed under the License is distributed on an "AS IS" basis,
 '     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
