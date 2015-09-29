@@ -2034,7 +2034,7 @@ Sub findAcrobat()
 Dim arFN As String
 Debug.Print "DocumentationPath["; documentationPath; "]"
 arFN = String(250, 0)
-Call FindExecutable(documentationPath & "EPlusMainMenu.pdf", vbNullString, arFN)
+Call FindExecutable(documentationPath & "InputOutputReference.pdf", vbNullString, arFN)
 acrobatReaderFileName = Left(arFN, InStr(arFN, vbNullChar) - 1) 'clean up
 Debug.Print "Acrobat["; acrobatReaderFileName; "]"
 End Sub
