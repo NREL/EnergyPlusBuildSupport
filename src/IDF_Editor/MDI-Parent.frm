@@ -141,47 +141,36 @@ Begin VB.MDIForm parentMDI
       End
       Begin VB.Menu mnuHelpGettingStarted 
          Caption         =   "EnergyPlus Getting Started"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpIORef 
          Caption         =   "EnergyPlus I/O Reference"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpOutDetails 
          Caption         =   "EnergyPlus Output Details and Examples"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpEngRef 
          Caption         =   "EnergyPlus Engineering Reference"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAuxProgs 
          Caption         =   "EnergyPlus Auxiliary Programs"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpEMSguide 
          Caption         =   "EnergyPlus EMS Application Guide"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpCompliance 
          Caption         =   "Using EnergyPlus for Compliance"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpExtInterface 
          Caption         =   "External Interface Application Guide "
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpTips 
          Caption         =   "Tips and Tricks Using EnergyPlus"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAcknowledge 
          Caption         =   "EnergyPlus Acknowledgments"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpDiv3 
          Caption         =   "-"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAbout 
          Caption         =   "About IDF Editor"
