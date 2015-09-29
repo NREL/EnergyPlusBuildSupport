@@ -1286,51 +1286,39 @@ Begin VB.Form eplUI
       End
       Begin VB.Menu mnuHelpGettingStarted 
          Caption         =   "EnergyPlus Getting Started"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpIORef 
          Caption         =   "EnergyPlus Input/Output Reference"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpOutDetails 
          Caption         =   "EnergyPlus Output Details and Examples"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpEngRef 
          Caption         =   "EnergyPlus Engineering Reference"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAuxProgs 
          Caption         =   "EnergyPlus Auxiliary Programs"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpPlantAppl 
          Caption         =   "Application Guide for Plant Loops"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpEMS 
          Caption         =   "Application Guide for EMS"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpCompliance 
          Caption         =   "Using EnergyPlus for Compliance"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpExtInterface 
          Caption         =   "External Interface Application Guide"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpTips 
          Caption         =   "Tips and Tricks Using EnergyPlus"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAcknowledge 
          Caption         =   "EnergyPlus Acknowledgments"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpDiv2 
          Caption         =   "-"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpCheckUpdates 
          Caption         =   "Check for Updates..."
@@ -2259,7 +2247,7 @@ Private Sub mnuHelpTips_Click()
 Call startAcrobat("Tips_and_Tricks_Using_EnergyPlus.pdf")
 End Sub
 Private Sub mnuHelpAcknowledge_Click()
-Call startAcrobat("Acknowledgments.pdf")
+Call startAcrobat("Acknowledgements.pdf")
 End Sub
 Private Sub mnuHelpCheckUpdates_Click()
 Call checkForUpdatesNow(True)
