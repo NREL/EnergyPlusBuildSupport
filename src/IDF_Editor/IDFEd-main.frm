@@ -739,47 +739,36 @@ Begin VB.Form IDFEdit
       End
       Begin VB.Menu mnuHelpDiv2 
          Caption         =   "-"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpGettingStarted 
          Caption         =   "EnergyPlus Getting Started"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpIORef 
          Caption         =   "EnergyPlus I/O Reference"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpOutDetails 
          Caption         =   "EnergyPlus Output Details and Examples"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpEngRef 
          Caption         =   "EnergyPlus Engineering Reference"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAuxProgs 
          Caption         =   "EnergyPlus Auxiliary Programs"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpEMSguide 
          Caption         =   "EnergyPlus EMS Application Guide"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpCompliance 
          Caption         =   "Using EnergyPlus for Compliance"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpExtInterface 
          Caption         =   "External Interface Application Guide "
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpTips 
          Caption         =   "Tips and Tricks Using EnergyPlus"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpAcknowledge 
          Caption         =   "EnergyPlus Acknowledgments"
-         Visible         =   0   'False
       End
       Begin VB.Menu mnuHelpDiv3 
          Caption         =   "-"
@@ -792,6 +781,9 @@ Begin VB.Form IDFEdit
       End
       Begin VB.Menu mnuCreateFieldsMissingUnits 
          Caption         =   "Create fieldsMissingUnits.txt"
+      End
+      Begin VB.Menu mnuCreateRefObjListTxt 
+         Caption         =   "Create RefObjList.txt"
       End
       Begin VB.Menu mnuHelpDiv4 
          Caption         =   "-"
@@ -2041,6 +2033,11 @@ Call dumpObjectList
 MsgBox "ObjectList.txt file created in program directory.", vbInformation, "Create ObjectList.txt"
 End Sub
 
+Private Sub mnuCreateRefObjListTxt_Click()
+Call dumpRefObjList
+MsgBox "RefObjList.txt file created in program directory.", vbInformation, "Create RefObjList.txt"
+End Sub
+
 Private Sub mnuEditFillRight_Click()
 Call fillGridToRight
 End Sub
@@ -2221,7 +2218,7 @@ Private Sub mnuHelpAuxProgs_Click()
 Call startAcrobat("AuxiliaryPrograms.pdf")
 End Sub
 Private Sub mnuHelpAcknowledge_Click()
-Call startAcrobat("Acknowledgments.pdf")
+Call startAcrobat("Acknowledgements.pdf")
 End Sub
 Private Sub mnuHelpCompliance_Click()
 Call startAcrobat("Using_EnergyPlus_for_Compliance.pdf")
@@ -2700,6 +2697,18 @@ fn = FreeFile
 Open App.Path & "\ObjectList.txt" For Output As fn
 For i = 0 To lstObjectTypes.ListCount - 1
   Print #fn, lstObjectTypes.List(i)
+Next i
+Close fn
+End Sub
+
+Sub dumpRefObjList()
+Dim i As Integer
+Dim fn As Integer
+fn = FreeFile
+Open App.Path & "\RefObjList.txt" For Output As fn
+For i = 1 To maxUsedObjListName
+  Print #fn, IDDObjListName(i).name
+  
 Next i
 Close fn
 End Sub
