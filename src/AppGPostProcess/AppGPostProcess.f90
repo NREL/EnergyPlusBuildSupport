@@ -8,41 +8,41 @@ PROGRAM AppGPostProcess
           ! PURPOSE OF THIS PROGRAM:
           ! The baseline for Appendix G requires simulating the baseline
           ! building in four cardinal directions and using the average.
-          ! This EnergyPlus utility takes the four HTML files generated 
-          ! by EnergyPlus and creates an average HTML file. In addition, 
-          ! this utility takes the four CSV files (based on ESO files) 
-          ! and creates an average CSV file. It will work on the meter 
+          ! This EnergyPlus utility takes the four HTML files generated
+          ! by EnergyPlus and creates an average HTML file. In addition,
+          ! this utility takes the four CSV files (based on ESO files)
+          ! and creates an average CSV file. It will work on the meter
           ! CSV file also.
 
           ! METHODOLOGY EMPLOYED:
           ! Read the four HTML and CSV files and create an average.
-          !   
-          ! The program is intended tobe run in the batch file as one of 
-          ! the last items and check for the existence of four files with 
+          !
+          ! The program is intended tobe run in the batch file as one of
+          ! the last items and check for the existence of four files with
           ! names such as
-          !   
+          !
           !   filename-G000.csv
           !   filename-G090.csv
           !   filename-G180.csv
           !   filename-G270.csv
-          !   
+          !
           ! or
-          !   
+          !
           !   filename-G000.html
           !   filename-G090.html
           !   filename-G180.html
           !   filename-G270.html
-          !   
+          !
           ! It would then average the four files together into a new file:
-          !   
+          !
           !   filename-GAVG.csv
-          !   
+          !
           ! or
-          !   
+          !
           !   filename-GAVG.html
-          !   
-          ! This would be done for the normal CSV, meter CSV and the tabular 
-          ! report CSV or HTML.  
+          !
+          ! This would be done for the normal CSV, meter CSV and the tabular
+          ! report CSV or HTML.
 
           ! REFERENCES:
           ! na
@@ -70,9 +70,11 @@ INTEGER, PARAMETER ::  esoCSV = 1
 INTEGER, PARAMETER ::  meterCSV = 2
 INTEGER, PARAMETER ::  numFilesAvg = 4
 INTEGER, PARAMETER ::  r64=KIND(1.0D0)
+INTEGER, PARAMETER ::  errFH = 200
 
 CHARACTER(len=MaxNameLength)  :: fileName ! name of one of the CSV or HTML file
 CHARACTER(len=MaxNameLength)  :: fileRoot ! root name for all files
+CHARACTER(len=MaxNameLength)  :: errFile ! error file name
 LOGICAL :: errorsExist = .FALSE.
 LOGICAL :: useHTMnotHTML = .FALSE.
 
@@ -82,20 +84,23 @@ LOGICAL :: useHTMnotHTML = .FALSE.
 ! =========================================================================
 ! =========================================================================
 
-PRINT "(A)", "  Started AppGPostProcess"
 ! File name can contain spaces if enclosed in double quotes. The double
 ! quotes are not included in the commandArgument return value
 CALL GET_COMMAND_ARGUMENT(1,fileName)
-PRINT "(A)",  "      File name["//TRIM(fileName)//"]"
 fileRoot = GetFileRoot(fileName)
-PRINT "(A)",  "      File root["//TRIM(fileRoot)//"]"
+errFile = TRIM(fileRoot) // '.appgerr'
+OPEN (UNIT=errFH, FILE=errFile, ACTION="WRITE") !output file
+CALL OutAndErrFile("  Started AppGPostProcess")
+CALL OutAndErrFile("      File name["//TRIM(fileName)//"]")
+CALL OutAndErrFile("      File root["//TRIM(fileRoot)//"]")
 CALL AverageHTMLfiles(fileRoot)
 CALL AverageCSVfiles(meterCSV,fileRoot)
 CALL AverageCSVfiles(esoCSV,fileRoot)
-PRINT "(A)", "  Complete"
+CALL OutAndErrFile("  Complete")
 IF (errorsExist) THEN
-  PRINT "(A)", "  "
-  PRINT "(A)", "  Errors were found. Press the ENTER key to exit."
+  CALL OutAndErrFile("  ")
+  CALL OutAndErrFile("Errors were found.")
+  PRINT "(A)", "Press the ENTER key to exit."
   READ(*,*)
 END IF
 STOP
@@ -118,12 +123,12 @@ FUNCTION GetFileRoot(stringIn) RESULT (stringOut)
           ! FUNCTION INFORMATION:
           !       AUTHOR         Jason Glazer
           !       DATE WRITTEN   March 2009
-          !       MODIFIED       
+          !       MODIFIED
           !       RE-ENGINEERED  na
 
           ! PURPOSE OF THIS FUNCTION:
           !   Remove the extension and the -GXXX that might appear
-          !   in the command line. 
+          !   in the command line.
 
           ! METHODOLOGY EMPLOYED:
           ! na
@@ -162,7 +167,7 @@ stringInUpper = MakeUPPERCase(stringIn) // '                 '
 slashPos = INDEX(stringInUpper,'\',BACK=.TRUE.)
 IF (slashPos .EQ. 0) slashPos = INDEX(stringInUpper,'/',BACK=.TRUE.)
 dotPos = INDEX(stringInUpper,'.',BACK=.TRUE.)
-IF (dotPos .LT. slashPos) dotPos = 0 
+IF (dotPos .LT. slashPos) dotPos = 0
 IF (dotPos .NE. 0) THEN
   !identify the exact type of extension
   IF (stringInUpper(dotPos+1:dotPos+4) .EQ. 'CSV') THEN
@@ -258,7 +263,7 @@ LOGICAL :: doWriteLine = .FALSE.
 INTEGER :: LineLength = 0
 LOGICAL :: isCell = .FALSE.
 INTEGER, DIMENSION(numFilesAvg) :: endOfCell = 0
-CHARACTER(len=MaxNameLength),DIMENSION(numFilesAvg)  :: cellContent = '' 
+CHARACTER(len=MaxNameLength),DIMENSION(numFilesAvg)  :: cellContent = ''
 LOGICAL :: isNumber
 LOGICAL :: anyHaveExponent = .FALSE.
 LOGICAL :: curHasExponent = .FALSE.
@@ -266,18 +271,18 @@ INTEGER :: maxDigitsBefore = 0
 INTEGER :: curDigitBefore = 0
 INTEGER :: maxDigitsAfter = 0
 INTEGER :: curDigitAfter = 0
-INTEGER :: endTag = 0
+!INTEGER :: endTag = 0
 REAL(r64), DIMENSION(numFilesAvg) :: readValue
 REAL(r64) :: sumReadValue
 IF (.NOT. useHTMnotHTML) THEN
-  PRINT "(A)",  "      Processing HTML files"
+  CALL OutAndErrFile("      Processing HTML files")
   inFile(1) = TRIM(rootFile) // '-G000Table.HTML'
   inFile(2) = TRIM(rootFile) // '-G090Table.HTML'
   inFile(3) = TRIM(rootFile) // '-G180Table.HTML'
   inFile(4) = TRIM(rootFile) // '-G270Table.HTML'
   outFile = TRIM(rootFile) // '-GAVGTable.HTML'
 ELSE
-  PRINT "(A)",  "      Processing HTM files"
+  CALL OutAndErrFile("      Processing HTM files")
   inFile(1) = TRIM(rootFile) // '-G000Table.HTM'
   inFile(2) = TRIM(rootFile) // '-G090Table.HTM'
   inFile(3) = TRIM(rootFile) // '-G180Table.HTM'
@@ -289,18 +294,18 @@ outFileNoExt = TRIM(rootFile) // '-GAVGTable'
 DO iFile = 1, numFilesAvg
   INQUIRE (FILE=inFile(iFile),EXIST = doesExist)
   IF (.NOT. doesExist) THEN
-    PRINT "(A)", "    ERROR File missing: " // TRIM(inFile(iFile))
+    CALL OutAndErrFile("    ERROR File missing: " // TRIM(inFile(iFile)))
     fileMissing = .TRUE.
     errorsExist = .TRUE.
-  END IF    
+  END IF
 END DO
-IF (fileMissing) RETURN 
+IF (fileMissing) RETURN
 !access all files
 DO iFile = 1, numFilesAvg
   OPEN (UNIT=iFile, FILE=inFile(iFile), POSITION="REWIND", ACTION="READ") !input files
 END DO
 OPEN (UNIT=outFH, FILE=outFile, ACTION="WRITE") !output file
-DO 
+DO
   lineCount = lineCount + 1
   doWriteLine = .FALSE.
   !read a line from each file
@@ -310,13 +315,13 @@ DO
     IF (readStatus(iFile) .EQ. eof) THEN
       anyFileEnd = .TRUE.
     END IF
-  END DO  
+  END DO
   ! if the line is the same in all three files just put into the average file.
   linesMatch = .TRUE.
   DO iFile = 2, numFilesAvg
     IF (.NOT. SameString(LineIn(iFile),LineIn(1))) THEN
       linesMatch = .FALSE.
-    END IF 
+    END IF
   END DO
   IF (linesMatch) THEN
     lineOut = LineIn(1)
@@ -326,13 +331,13 @@ DO
     IF (areLinesSameExceptTime(LineIn)) THEN
       lineOut = LineIn(1)
       doWriteLine = .TRUE.
-    ELSE  
+    ELSE
       ! If this line in all files is a table cell then it could be averaged
       ! see if this is a value line that might need to be averaged
       isCell = .TRUE.
       DO iFile = 1, numFilesAvg
         !                            123456789012345678901234567890
-        IF (LineIn(iFile)(1:22) .NE.'    <td align="right">') THEN     
+        IF (LineIn(iFile)(1:22) .NE.'    <td align="right">') THEN
           isCell = .FALSE.
           EXIT
         END IF
@@ -356,7 +361,7 @@ DO
             isNumber = .FALSE.
             EXIT
           END IF
-        END DO  
+        END DO
         IF (isNumber) THEN
           sumReadValue = 0.0
           DO iFile = 1, numFilesAvg
@@ -383,7 +388,7 @@ DO
           lineOut = TRIM(lineOut) // '</td>'
           doWriteLine = .TRUE.
         ELSE
-          !if it is not a number then just put all four values into the cell 
+          !if it is not a number then just put all four values into the cell
           lineOut = '    <td align="right">'
           DO iFile = 1, numFilesAvg
             lineOut = TRIM(lineOut) //'{' // TRIM(cellContent(iFile)) // '}'
@@ -397,7 +402,7 @@ DO
           !DO iFile = 1, numFilesAvg
           !  lineOut = TRIM(lineOut) //'{' // TRIM(LineIn(iFile)(8:)) // '}'
           !END DO
-          lineOut = '<title>' // TRIM(outFileNoExt) 
+          lineOut = '<title>' // TRIM(outFileNoExt)
           doWriteLine = .TRUE.
         ELSEIF (lineIn(1)(1:16) .EQ. '<p>Building: <b>') THEN
           !lineOut = '<p>Building: <b>'
@@ -411,32 +416,32 @@ DO
           lineOut = '<p>Building: <b>' // TRIM(outFileNoExt) // '</b></p>'
           doWriteLine = .TRUE.
         ELSE
-          PRINT "(A,I6)"," ERROR - Unexcepted non-matching line in the HTML files on line: ",lineCount
+          CALL OutAndErrFile(" ERROR - Unexcepted non-matching line in the HTML files on line: ",lineCount)
           errorsExist = .TRUE.
         END IF
       END IF
     END IF
     ! Check for consistance for report names and subtable headings
-    ! In this IF block lines do not match and the following should 
+    ! In this IF block lines do not match and the following should
     ! be false
     !                         123456789012345678901234567890
     IF (LineIn(1)(1:10) .EQ. '<p>Report:') THEN
-      PRINT "(A,I6)"," ERROR - Report name not identical in the HTML files on line: ",lineCount
+      CALL OutAndErrFile(" ERROR - Report name not identical in the HTML files on line: ",lineCount)
       errorsExist = .TRUE.
-    END IF  
+    END IF
     !                        123456789012345678901234567890
     IF (LineIn(1)(1:7) .EQ. '<p>For:') THEN
-      PRINT "(A,I6)"," ERROR - The reported FOR: name is not identical in the HTML files on line: ",lineCount
+      CALL OutAndErrFile(" ERROR - The reported FOR: name is not identical in the HTML files on line: ",lineCount)
       errorsExist = .TRUE.
-    END IF  
+    END IF
     !123456789012345678901234567890
     !<b>Central Plant</b><br><br>
     LineLength = LEN_TRIM(LineIn(1))
     IF (LineLength .GE. 12) THEN
       IF (LineIn(1)(LineLength-11:) .EQ. '</b><br><br>') THEN
-        PRINT "(A,I6)"," ERROR - Subtable name is not identical in the HTML files on line: ",lineCount
+        CALL OutAndErrFile(" ERROR - Subtable name is not identical in the HTML files on line: ",lineCount)
         errorsExist = .TRUE.
-      END IF  
+      END IF
     END IF
   END IF
   IF (doWriteLine) THEN
@@ -475,7 +480,7 @@ IMPLICIT NONE    ! Enforce explicit typing of all variables in this routine
 
           ! SUBROUTINE ARGUMENT DEFINITIONS:
 
-CHARACTER(len=MaxNameLength),INTENT(IN) :: stringIn 
+CHARACTER(len=MaxNameLength),INTENT(IN) :: stringIn
 
           ! SUBROUTINE PARAMETER DEFINITIONS:
 
@@ -523,7 +528,7 @@ IMPLICIT NONE    ! Enforce explicit typing of all variables in this routine
 
           ! SUBROUTINE ARGUMENT DEFINITIONS:
 
-CHARACTER(len=LongString), DIMENSION(numFilesAvg),INTENT(IN) :: inLines 
+CHARACTER(len=LongString), DIMENSION(numFilesAvg),INTENT(IN) :: inLines
 
           ! SUBROUTINE PARAMETER DEFINITIONS:
 
@@ -548,7 +553,7 @@ DO iFile = 2, numFilesAvg
   IF (inCopy(iFile) .NE. inCopy(1)) THEN
     areLinesSameExceptTime = .FALSE.
     EXIT
-  END IF 
+  END IF
 END DO
 END FUNCTION areLinesSameExceptTime
 
@@ -576,7 +581,7 @@ IMPLICIT NONE    ! Enforce explicit typing of all variables in this routine
 
           ! SUBROUTINE ARGUMENT DEFINITIONS:
 
-CHARACTER(len=LongString),INTENT(IN) :: lineIn 
+CHARACTER(len=LongString),INTENT(IN) :: lineIn
 CHARACTER(len=LongString) :: lineOut
 
           ! SUBROUTINE PARAMETER DEFINITIONS:
@@ -589,7 +594,6 @@ CHARACTER(len=LongString) :: lineOut
 
           ! SUBROUTINE LOCAL VARIABLE DECLARATIONS:
           !    na
-CHARACTER(len=LongString) :: lineNoFirstColon = ''
 INTEGER :: i
 
 !12345678901234567890
@@ -597,15 +601,15 @@ INTEGER :: i
 ! HH:MM
 ! H:MM
 lineOut = lineIn
-! loop through the string from where the first colon could be to 
-! where the last colon could be 
+! loop through the string from where the first colon could be to
+! where the last colon could be
 DO i = 2,LEN_TRIM(lineIn) - 3
   IF (lineOut(i:i) .EQ. ':') THEN
     IF (lineOut(i+3:i+3) .EQ. ':') THEN
       ! HH:MM:SS format
       IF (VERIFY(lineOut(i-2:i+5),':0123456789') .EQ. 0) THEN
         lineOut = lineOut(:i-3) // '        ' // lineOut(i+6:)
-      END IF 
+      END IF
     ELSE
       ! HH:MM format
       IF (lineOut(i-2:i-2) .NE. ' ') THEN
@@ -616,7 +620,7 @@ DO i = 2,LEN_TRIM(lineIn) - 3
         IF (VERIFY(lineOut(i-1:i+2),':0123456789') .EQ. 0) THEN
           lineOut = lineOut(:i-2) // '    ' // lineOut(i+3:)
         END IF
-      END IF 
+      END IF
     END IF
   END IF
 END DO
@@ -669,7 +673,7 @@ LOGICAL :: anyFileEnd = .FALSE.
 CHARACTER(len=LongString), DIMENSION(numFilesAvg) :: LineIn = ''
 CHARACTER(len=LongString) :: LineOut
 LOGICAL :: firstLine = .TRUE.
-LOGICAL, DIMENSION(numFilesAvg) ::  lastComma = .FALSE. 
+LOGICAL, DIMENSION(numFilesAvg) ::  lastComma = .FALSE.
 LOGICAL :: anyLastComma = .FALSE.
 INTEGER :: lineCount = 0
 LOGICAL :: linesMatch = .FALSE.
@@ -687,16 +691,16 @@ INTEGER :: curDigitBefore = 0
 INTEGER :: maxDigitsAfter = 0
 INTEGER :: curDigitAfter = 0
 
-SELECT CASE (kindOfCSV) 
+SELECT CASE (kindOfCSV)
   CASE (esoCSV)
-    PRINT "(A)",  "      Processing main CSV files"
+    CALL OutAndErrFile("      Processing main CSV files")
     inFile(1) = TRIM(rootFile) // '-G000.CSV'
     inFile(2) = TRIM(rootFile) // '-G090.CSV'
     inFile(3) = TRIM(rootFile) // '-G180.CSV'
     inFile(4) = TRIM(rootFile) // '-G270.CSV'
     outFile = TRIM(rootFile) // '-GAVG.CSV'
   CASE (meterCSV)
-    PRINT "(A)",  "      Processing meter CSV files"
+    CALL OutAndErrFile("      Processing meter CSV files")
     inFile(1) = TRIM(rootFile) // '-G000Meter.CSV'
     inFile(2) = TRIM(rootFile) // '-G090Meter.CSV'
     inFile(3) = TRIM(rootFile) // '-G180Meter.CSV'
@@ -707,12 +711,12 @@ END SELECT
 DO iFile = 1, numFilesAvg
   INQUIRE (FILE=inFile(iFile),EXIST = doesExist)
   IF (.NOT. doesExist) THEN
-    PRINT "(A)", "    ERROR File missing: " // TRIM(inFile(iFile))
+    CALL OutAndErrFile("    ERROR File missing: " // TRIM(inFile(iFile)))
     errorsExist = .TRUE.
     fileMissing = .TRUE.
-  END IF    
+  END IF
 END DO
-IF (fileMissing) RETURN 
+IF (fileMissing) RETURN
 !access all files
 DO iFile = 1, numFilesAvg
   OPEN (UNIT=iFile, FILE=inFile(iFile), POSITION="REWIND", ACTION="READ") !input files
@@ -721,9 +725,9 @@ OPEN (UNIT=outFH, FILE=outFile, ACTION="WRITE") !output file
 !loop through the input files reading one line at a time from each file
 firstLine = .TRUE.
 anyFileEnd = .FALSE.
-DO 
+DO
   lineCount = lineCount + 1
-!  WRITE(outFH,'(A,I6)') 'LineCount',lineCount 
+!  WRITE(outFH,'(A,I6)') 'LineCount',lineCount
   !read a line from each file
   LineIn = ''
   DO iFile = 1, numFilesAvg
@@ -731,25 +735,25 @@ DO
     IF (readStatus(iFile) .EQ. eof) THEN
       anyFileEnd = .TRUE.
     END IF
-  END DO  
+  END DO
   ! check if it is the first line
   IF (firstLine) THEN
     linesMatch = .TRUE.
     DO iFile = 2, numFilesAvg
       IF (.NOT. SameString(LineIn(iFile),LineIn(1))) THEN
         linesMatch = .FALSE.
-      END IF 
+      END IF
     END DO
     ! if all the first lines are the same print it in the output file
     IF (linesMatch) THEN
       WRITE(outFH,"(A)") TRIM(LineIn(numFilesAvg))
     ELSE
-      PRINT "(A)"," ERROR - Heading lines in the CSV files are not identical."
+      CALL OutAndErrFile(" ERROR - Heading lines in the CSV files are not identical.")
       errorsExist = .TRUE.
     END IF
     firstLine = .FALSE.
     CYCLE
-  END IF  
+  END IF
   !set flag for last comma for all files to be false
   lastComma = .FALSE. !array
   anyLastComma = .FALSE.
@@ -796,7 +800,7 @@ DO
     IF (firstColumn) THEN
       DO iFile = 2,numFilesAvg
         IF (.NOT. SameString(fldString(iFile),fldString(1))) THEN
-          PRINT "(A,I6)"," ERROR - Date/Time is not identical in the CSV files on line: ",lineCount
+          CALL OutAndErrFile(" ERROR - Date/Time is not identical in the CSV files on line: ",lineCount)
           errorsExist = .TRUE.
         END IF
       END DO
@@ -805,18 +809,19 @@ DO
     ELSE
       ! if any digits then add it to the output line
       IF ((maxDigitsBefore .GT. 0) .OR. (maxDigitsAfter .GT. 0)) THEN
-        LineOut = TRIM(LineOut) // ',' // TRIM(ADJUSTL(RealToStr(sumReadValue/numFilesAvg,maxDigitsBefore, maxDigitsAfter,anyHaveExponent)))
+        LineOut = TRIM(LineOut) // ',' // TRIM(ADJUSTL(RealToStr(sumReadValue/numFilesAvg,maxDigitsBefore, maxDigitsAfter, &
+        anyHaveExponent)))
       ELSE
         LineOut = TRIM(LineOut) // ','
       END IF
     END IF
     IF (anyLastComma) EXIT
-  END DO  
+  END DO
   ! go to the next line
-  WRITE(outFH,'(A)') TRIM(LineOut) 
+  WRITE(outFH,'(A)') TRIM(LineOut)
   DO iFile = 1, numFilesAvg
     IF (.NOT. lastComma(iFile)) THEN
-      PRINT "(A,I6)"," ERROR - Number of commas in the CSV files are not identical on line: ",lineCount
+      CALL OutAndErrFile(" ERROR - Number of commas in the CSV files are not identical on line: ",lineCount)
       errorsExist = .TRUE.
     END IF
   END DO
@@ -826,7 +831,7 @@ END DO
 !check if all files have same status and if not show warning
 DO iFile = 1, numFilesAvg
   IF (readStatus(iFile) .NE. eof) THEN
-    PRINT "(A, I6)"," ERROR - Number of lines in the CSV files are not identical. ", readStatus(iFile)
+    CALL OutAndErrFile(" ERROR - Number of lines in the CSV files are not identical. ", readStatus(iFile))
     errorsExist = .TRUE.
   END IF
 END DO
@@ -930,7 +935,7 @@ ELSEIF (LEN(TestString1) <= MaxInputLineLength .and. LEN(TestString2) <= MaxInpu
   ! This test (MaxInputLineLength) is necessary because of PowerStation Compiler
   SameString=MakeUPPERCase(TestString1) == MakeUPPERCase(TestString2)
 ELSE
-  PRINT "(A)"," ERROR: SameString aborting -- input strings too long"
+  CALL OutAndErrFile(" ERROR: SameString aborting -- input strings too long")
   errorsExist = .TRUE.
   SameString=.false.
 ENDIF
@@ -1006,12 +1011,12 @@ SUBROUTINE GetPointAndExponent(stringIn,digitsBeforeOut,digitsAfterOut,exponentO
           ! FUNCTION INFORMATION:
           !       AUTHOR         Jason Glazer
           !       DATE WRITTEN   March 2009
-          !       MODIFIED       
+          !       MODIFIED
           !       RE-ENGINEERED  na
 
           ! PURPOSE OF THIS FUNCTION:
           !   Examines a string containing a number and determines how
-          !   many digits are after the decimal point and if the 
+          !   many digits are after the decimal point and if the
           !   exponential form (E01) is used for the number.
 
           ! METHODOLOGY EMPLOYED:
@@ -1134,11 +1139,11 @@ FUNCTION RealToStr(RealIn,digitsBefore,digitsAfter,useExponent) RESULT (stringOu
           ! FUNCTION LOCAL VARIABLE DECLARATIONS:
   CHARACTER(LEN=40) :: stringOut
   INTEGER           :: width
-  CHARACTER(LEN=40) :: formatString 
+  CHARACTER(LEN=40) :: formatString
 
   width = digitsBefore + digitsAfter + 1 !add one for the decimal point
   IF (useExponent) THEN
-    width = width + 5          !add 3 digit exponent plus sign plus letter E 'E-001' 
+    width = width + 5          !add 3 digit exponent plus sign plus letter E 'E-001'
     formatString = '(E' // TRIM(ADJUSTL(IntToStr(width))) //'.'// TRIM(ADJUSTL(IntToStr(digitsAfter))) // 'E3)'
   ELSE
     formatString = '(F' // TRIM(ADJUSTL(IntToStr(width))) //'.'// TRIM(ADJUSTL(IntToStr(digitsAfter))) // ')'
@@ -1146,4 +1151,42 @@ FUNCTION RealToStr(RealIn,digitsBefore,digitsAfter,useExponent) RESULT (stringOu
 !debug  stringOut = formatString
   WRITE(FMT=formatString, UNIT=stringOut) RealIn
 END FUNCTION
+
+!----------------------------------------------------------------------------------
+SUBROUTINE OutAndErrFile(stringIn,intIn)
+          ! FUNCTION INFORMATION:
+          !       AUTHOR         Jason Glazer
+          !       DATE WRITTEN   January 2016
+          !       MODIFIED
+          !       RE-ENGINEERED  na
+
+          ! PURPOSE OF THIS FUNCTION:
+          !   Examines a string containing a number and determines how
+          !   many digits are after the decimal point and if the
+          !   exponential form (E01) is used for the number.
+
+          ! METHODOLOGY EMPLOYED:
+          ! na
+
+          ! REFERENCES:
+          ! na
+
+          ! USE STATEMENTS:
+          ! na
+
+  IMPLICIT NONE ! Enforce explicit typing of all variables in this routine
+
+          ! FUNCTION ARGUMENT DEFINITIONS:
+CHARACTER(len=*), INTENT(IN) :: stringIn
+INTEGER, INTENT(IN), optional :: intIn
+
+IF (PRESENT(intIn)) THEN
+  PRINT "(A, I6)",  TRIM(stringIn), intIn
+  WRITE(errFH,"(A, I6)") TRIM(stringIn), intIn
+ELSE
+  PRINT "(A)",  TRIM(stringIn)
+  WRITE(errFH,"(A)") TRIM(stringIn)
+ENDIF
+END SUBROUTINE
+
 END PROGRAM AppGPostProcess
