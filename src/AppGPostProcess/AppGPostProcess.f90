@@ -88,7 +88,7 @@ LOGICAL :: useHTMnotHTML = .FALSE.
 ! quotes are not included in the commandArgument return value
 CALL GET_COMMAND_ARGUMENT(1,fileName)
 fileRoot = GetFileRoot(fileName)
-errFile = TRIM(fileRoot) // '.appgerr'
+errFile = TRIM(fileRoot) // '-AppGErr.txt'
 OPEN (UNIT=errFH, FILE=errFile, ACTION="WRITE") !output file
 CALL OutAndErrFile("  Started AppGPostProcess")
 CALL OutAndErrFile("      File name["//TRIM(fileName)//"]")
