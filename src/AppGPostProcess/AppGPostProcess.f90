@@ -90,16 +90,16 @@ CALL GET_COMMAND_ARGUMENT(1,fileName)
 fileRoot = GetFileRoot(fileName)
 errFile = TRIM(fileRoot) // '-AppGErr.txt'
 OPEN (UNIT=errFH, FILE=errFile, ACTION="WRITE") !output file
-CALL OutAndErrFile("  Started AppGPostProcess")
-CALL OutAndErrFile("      File name["//TRIM(fileName)//"]")
-CALL OutAndErrFile("      File root["//TRIM(fileRoot)//"]")
+CALL OutMsg("  Started AppGPostProcess")
+CALL OutMsg("      File name["//TRIM(fileName)//"]")
+CALL OutMsg("      File root["//TRIM(fileRoot)//"]")
 CALL AverageHTMLfiles(fileRoot)
 CALL AverageCSVfiles(meterCSV,fileRoot)
 CALL AverageCSVfiles(esoCSV,fileRoot)
-CALL OutAndErrFile("  Complete")
+CALL OutMsg("  Complete")
 IF (errorsExist) THEN
-  CALL OutAndErrFile("  ")
-  CALL OutAndErrFile("Errors were found.")
+  CALL OutMsg("  ")
+  CALL OutMsg("Errors were found.")
   PRINT "(A)", "Press the ENTER key to exit."
   READ(*,*)
 END IF
@@ -274,15 +274,17 @@ INTEGER :: curDigitAfter = 0
 !INTEGER :: endTag = 0
 REAL(r64), DIMENSION(numFilesAvg) :: readValue
 REAL(r64) :: sumReadValue
+INTEGER :: numLinesSkipped = 0
+
 IF (.NOT. useHTMnotHTML) THEN
-  CALL OutAndErrFile("      Processing HTML files")
+  CALL OutMsg("      Processing HTML files")
   inFile(1) = TRIM(rootFile) // '-G000Table.HTML'
   inFile(2) = TRIM(rootFile) // '-G090Table.HTML'
   inFile(3) = TRIM(rootFile) // '-G180Table.HTML'
   inFile(4) = TRIM(rootFile) // '-G270Table.HTML'
   outFile = TRIM(rootFile) // '-GAVGTable.HTML'
 ELSE
-  CALL OutAndErrFile("      Processing HTM files")
+  CALL OutMsg("      Processing HTM files")
   inFile(1) = TRIM(rootFile) // '-G000Table.HTM'
   inFile(2) = TRIM(rootFile) // '-G090Table.HTM'
   inFile(3) = TRIM(rootFile) // '-G180Table.HTM'
@@ -296,7 +298,6 @@ DO iFile = 1, numFilesAvg
   IF (.NOT. doesExist) THEN
     CALL OutAndErrFile("    ERROR File missing: " // TRIM(inFile(iFile)))
     fileMissing = .TRUE.
-    errorsExist = .TRUE.
   END IF
 END DO
 IF (fileMissing) RETURN
@@ -416,23 +417,37 @@ DO
           lineOut = '<p>Building: <b>' // TRIM(outFileNoExt) // '</b></p>'
           doWriteLine = .TRUE.
         ELSE
-          CALL OutAndErrFile(" ERROR - Unexcepted non-matching line in the HTML files on line: ",lineCount)
-          errorsExist = .TRUE.
+          CALL OutAndErrFile(" ERROR - Unexpected non-matching line in the HTML files on line: ",lineCount)
+          ! to recover from this error try to find the next </table> in each row. first end the table row and table
+          WRITE(outFH,"(A)") TRIM('</tr>')
+          WRITE(outFH,"(A)") TRIM('</table>')
+          DO iFile = 1, numFilesAvg
+            numLinesSkipped = 0
+            DO
+              IF (LineIn(iFile)(1:8) .EQ. '</table>') EXIT
+              READ(UNIT=iFile, FMT="(A)", IOSTAT=readStatus(iFile)) LineIn(iFile)
+              numLinesSkipped = numLinesSkipped + 1
+              IF (readStatus(iFile) .EQ. eof) THEN
+                anyFileEnd = .TRUE.
+                EXIT
+              END IF
+            END DO
+            CALL OutAndErrFile("           For file: ",iFile)
+            CALL OutAndErrFile("             skipped lines: ",numLinesSkipped)
+          END DO
         END IF
       END IF
     END IF
-    ! Check for consistance for report names and subtable headings
+    ! Check for consistency for report names and subtable headings
     ! In this IF block lines do not match and the following should
     ! be false
     !                         123456789012345678901234567890
     IF (LineIn(1)(1:10) .EQ. '<p>Report:') THEN
       CALL OutAndErrFile(" ERROR - Report name not identical in the HTML files on line: ",lineCount)
-      errorsExist = .TRUE.
     END IF
     !                        123456789012345678901234567890
     IF (LineIn(1)(1:7) .EQ. '<p>For:') THEN
       CALL OutAndErrFile(" ERROR - The reported FOR: name is not identical in the HTML files on line: ",lineCount)
-      errorsExist = .TRUE.
     END IF
     !123456789012345678901234567890
     !<b>Central Plant</b><br><br>
@@ -440,7 +455,6 @@ DO
     IF (LineLength .GE. 12) THEN
       IF (LineIn(1)(LineLength-11:) .EQ. '</b><br><br>') THEN
         CALL OutAndErrFile(" ERROR - Subtable name is not identical in the HTML files on line: ",lineCount)
-        errorsExist = .TRUE.
       END IF
     END IF
   END IF
@@ -693,14 +707,14 @@ INTEGER :: curDigitAfter = 0
 
 SELECT CASE (kindOfCSV)
   CASE (esoCSV)
-    CALL OutAndErrFile("      Processing main CSV files")
+    CALL OutMsg("      Processing main CSV files")
     inFile(1) = TRIM(rootFile) // '-G000.CSV'
     inFile(2) = TRIM(rootFile) // '-G090.CSV'
     inFile(3) = TRIM(rootFile) // '-G180.CSV'
     inFile(4) = TRIM(rootFile) // '-G270.CSV'
     outFile = TRIM(rootFile) // '-GAVG.CSV'
   CASE (meterCSV)
-    CALL OutAndErrFile("      Processing meter CSV files")
+    CALL OutMsg("      Processing meter CSV files")
     inFile(1) = TRIM(rootFile) // '-G000Meter.CSV'
     inFile(2) = TRIM(rootFile) // '-G090Meter.CSV'
     inFile(3) = TRIM(rootFile) // '-G180Meter.CSV'
@@ -712,7 +726,6 @@ DO iFile = 1, numFilesAvg
   INQUIRE (FILE=inFile(iFile),EXIST = doesExist)
   IF (.NOT. doesExist) THEN
     CALL OutAndErrFile("    ERROR File missing: " // TRIM(inFile(iFile)))
-    errorsExist = .TRUE.
     fileMissing = .TRUE.
   END IF
 END DO
@@ -749,7 +762,6 @@ DO
       WRITE(outFH,"(A)") TRIM(LineIn(numFilesAvg))
     ELSE
       CALL OutAndErrFile(" ERROR - Heading lines in the CSV files are not identical.")
-      errorsExist = .TRUE.
     END IF
     firstLine = .FALSE.
     CYCLE
@@ -801,7 +813,6 @@ DO
       DO iFile = 2,numFilesAvg
         IF (.NOT. SameString(fldString(iFile),fldString(1))) THEN
           CALL OutAndErrFile(" ERROR - Date/Time is not identical in the CSV files on line: ",lineCount)
-          errorsExist = .TRUE.
         END IF
       END DO
       LineOut = TRIM(fldString(1))
@@ -822,7 +833,6 @@ DO
   DO iFile = 1, numFilesAvg
     IF (.NOT. lastComma(iFile)) THEN
       CALL OutAndErrFile(" ERROR - Number of commas in the CSV files are not identical on line: ",lineCount)
-      errorsExist = .TRUE.
     END IF
   END DO
   LineIn = ''
@@ -832,7 +842,6 @@ END DO
 DO iFile = 1, numFilesAvg
   IF (readStatus(iFile) .NE. eof) THEN
     CALL OutAndErrFile(" ERROR - Number of lines in the CSV files are not identical. ", readStatus(iFile))
-    errorsExist = .TRUE.
   END IF
 END DO
 CLOSE(outFH)
@@ -936,7 +945,6 @@ ELSEIF (LEN(TestString1) <= MaxInputLineLength .and. LEN(TestString2) <= MaxInpu
   SameString=MakeUPPERCase(TestString1) == MakeUPPERCase(TestString2)
 ELSE
   CALL OutAndErrFile(" ERROR: SameString aborting -- input strings too long")
-  errorsExist = .TRUE.
   SameString=.false.
 ENDIF
 END FUNCTION SameString
@@ -1187,6 +1195,39 @@ ELSE
   PRINT "(A)",  TRIM(stringIn)
   WRITE(errFH,"(A)") TRIM(stringIn)
 ENDIF
+errorsExist = .TRUE.
 END SUBROUTINE
+
+SUBROUTINE OutMsg(stringIn)
+          ! FUNCTION INFORMATION:
+          !       AUTHOR         Jason Glazer
+          !       DATE WRITTEN   January 2016
+          !       MODIFIED
+          !       RE-ENGINEERED  na
+
+          ! PURPOSE OF THIS FUNCTION:
+          !   Examines a string containing a number and determines how
+          !   many digits are after the decimal point and if the
+          !   exponential form (E01) is used for the number.
+
+          ! METHODOLOGY EMPLOYED:
+          ! na
+
+          ! REFERENCES:
+          ! na
+
+          ! USE STATEMENTS:
+          ! na
+
+  IMPLICIT NONE ! Enforce explicit typing of all variables in this routine
+
+          ! FUNCTION ARGUMENT DEFINITIONS:
+CHARACTER(len=*), INTENT(IN) :: stringIn
+
+PRINT "(A)",  TRIM(stringIn)
+WRITE(errFH,"(A)") TRIM(stringIn)
+
+END SUBROUTINE
+
 
 END PROGRAM AppGPostProcess
