@@ -782,6 +782,9 @@ Begin VB.Form IDFEdit
       Begin VB.Menu mnuCreateFieldsMissingUnits 
          Caption         =   "Create fieldsMissingUnits.txt"
       End
+      Begin VB.Menu mnuCreateRefObjListTxt 
+         Caption         =   "Create RefObjList.txt"
+      End
       Begin VB.Menu mnuHelpDiv4 
          Caption         =   "-"
       End
@@ -1580,6 +1583,10 @@ If actCol >= 0 Then
         grdNew.Cell(flexcpBackColor, Row, Col) = 0
       End If
   End Select
+  ' for any type of field, if it is required and blank show that it is out of range
+  If IDDField(actField).required And Trim(IDFValue(actValue).entry) = "" Then
+    grdNew.Cell(flexcpBackColor, Row, Col) = outOfRangeColor
+  End If
 End If
 If lastKeyEnter And downWhenEnter Then
   If grdNew.Row + 1 < grdNew.Rows Then
@@ -2026,6 +2033,11 @@ Call dumpObjectList
 MsgBox "ObjectList.txt file created in program directory.", vbInformation, "Create ObjectList.txt"
 End Sub
 
+Private Sub mnuCreateRefObjListTxt_Click()
+Call dumpRefObjList
+MsgBox "RefObjList.txt file created in program directory.", vbInformation, "Create RefObjList.txt"
+End Sub
+
 Private Sub mnuEditFillRight_Click()
 Call fillGridToRight
 End Sub
@@ -2187,7 +2199,8 @@ End Sub
 
 ' References to EnergyPlus Documentation
 Private Sub mnuHelpEPDocs_Click()
-Call startAcrobat("EPlusMainMenu.pdf")
+'Call startAcrobat("EPlusMainMenu.pdf")
+Call viewWebPage(documentationPath + "index.html")
 End Sub
 Private Sub mnuHelpGettingStarted_Click()
 Call startAcrobat("GettingStarted.pdf")
@@ -2205,7 +2218,7 @@ Private Sub mnuHelpAuxProgs_Click()
 Call startAcrobat("AuxiliaryPrograms.pdf")
 End Sub
 Private Sub mnuHelpAcknowledge_Click()
-Call startAcrobat("Acknowledgments.pdf")
+Call startAcrobat("Acknowledgements.pdf")
 End Sub
 Private Sub mnuHelpCompliance_Click()
 Call startAcrobat("Using_EnergyPlus_for_Compliance.pdf")
@@ -2224,6 +2237,9 @@ End Sub
 Private Sub mnuHelpWhatsNew_Click()
 frmWhatsNew.Show
 End Sub
+
+
+
 
 Private Sub mnuJumpItem_Click(Index As Integer)
 If mnuJumpItem(Index).Caption <> "No destination" Then
@@ -2685,6 +2701,18 @@ Next i
 Close fn
 End Sub
 
+Sub dumpRefObjList()
+Dim i As Integer
+Dim fn As Integer
+fn = FreeFile
+Open App.Path & "\RefObjList.txt" For Output As fn
+For i = 1 To maxUsedObjListName
+  Print #fn, IDDObjListName(i).name
+  
+Next i
+Close fn
+End Sub
+
 '-----------------------------------------------------------------------------
 'DUMP OBJECT IDF FILE
 ' File used for debugging only and has no reasonable values in each field
@@ -2864,6 +2892,11 @@ Do While curObject > 0
         End If
       End If
     End If
+    ' for any type of field, if it is required and blank show that it is out of range
+    If IDDField(curField).required And Trim(grdNew.TextMatrix(j, i)) = "" Then
+      grdNew.Cell(flexcpBackColor, j, i) = outOfRangeColor
+    End If
+    
     'indicate the REQUIRED by a grey bar in each cell
     'If IDDField(curField).required Then
       'grdNew.Cell(flexcpFloodPercent, j, i) = -3
@@ -5321,6 +5354,9 @@ For iObject = 1 To maxUsedObject
             newMsg = "Invalid reference"
           End If
       End Select
+      If IDDField(fieldIndx).required And Trim(curAlphaValue) = "" Then
+        newMsg = "Blank value for required field"
+      End If
       If newMsg <> "" Then
         numValidityMsg = numValidityMsg + 1
         If numValidityMsg > sizeValidityMsg Then
@@ -5398,7 +5434,7 @@ Else
           Do While refObject > 0
             StartVal = IDFObject(refObject).valueStart
             'the following line actually adds items to the pull down list
-            If UCase(curString) = UCase(IDFValue(StartVal + deltaField).entry) Then
+            If UCase(Trim(curString)) = UCase(Trim(IDFValue(StartVal + deltaField).entry)) Then
               found = True
               Exit Do
             End If
@@ -5830,15 +5866,15 @@ End Sub
 
 '     NOTICE
 '
-'     The contents of this file are subject to the EnergyPlus Open Source License 
-'     Version 1.0 (the "License"); you may not use this file except in compliance 
-'     with the License. You may obtain a copy of the License at 
+'     The contents of this file are subject to the EnergyPlus Open Source License
+'     Version 1.0 (the "License"); you may not use this file except in compliance
+'     with the License. You may obtain a copy of the License at
 '
 '     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
 '
-'     Software distributed under the License is distributed on an "AS IS" basis, 
-'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for 
-'     the specific language governing rights and limitations under the License. 
+'     Software distributed under the License is distributed on an "AS IS" basis,
+'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+'     the specific language governing rights and limitations under the License.
 '
 '     Copyright © 1996-2014 GARD Analytics.  All rights reserved.
 '
