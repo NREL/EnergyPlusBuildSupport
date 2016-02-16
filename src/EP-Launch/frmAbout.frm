@@ -75,7 +75,7 @@ Begin VB.Form frmAbout
       Width           =   3855
    End
    Begin VB.Label lblTitle 
-      Caption         =   "EP-Launch  -  Version 2.06a"
+      Caption         =   "EP-Launch  -  Version 2.08d"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   12
@@ -116,7 +116,7 @@ If eplUI.getOSVersion() = 1 Then
 Else
   lblPlatform.Caption = "Running on Windows NT, 2000, XP, Vista, 7, 8"
 End If
-txtNotice.Text = "Copyright (c) 2000-2013 GARD Analytics, " & vbCrLf
+txtNotice.Text = "Copyright (c) 2000-2015 GARD Analytics, " & vbCrLf
 txtNotice.Text = txtNotice.Text & "All rights reserved.                    " & vbCrLf
 txtNotice.Text = txtNotice.Text & "                                        " & vbCrLf
 txtNotice.Text = txtNotice.Text & "NOTICE: The U.S. Government is granted  " & vbCrLf
@@ -194,7 +194,7 @@ End Sub
 '     Version 1.0 (the "License"); you may not use this file except in compliance
 '     with the License. You may obtain a copy of the License at
 '
-'     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
+'     https://energyplus.net/licensing
 '
 '     Software distributed under the License is distributed on an "AS IS" basis,
 '     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
@@ -214,3 +214,6 @@ End Sub
 '
 '     TRADEMARKS: EnergyPlus is a trademark of the US Department of Energy.
 '
+Private Sub lblTitle_Click()
+
+End Sub

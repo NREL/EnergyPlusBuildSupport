@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "Comdlg32.ocx"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "Mscomctl.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form eplUI 
    BorderStyle     =   1  'Fixed Single
@@ -43,130 +43,6 @@ Begin VB.Form eplUI
          TabIndex        =   12
          Top             =   3000
          Width           =   8295
-         Begin VB.Frame frameViewSelectOut 
-            BorderStyle     =   0  'None
-            Height          =   2175
-            Left            =   600
-            TabIndex        =   48
-            Top             =   360
-            Width           =   7455
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 8"
-               Height          =   375
-               Index           =   7
-               Left            =   5760
-               TabIndex        =   93
-               Top             =   1440
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 7"
-               Height          =   375
-               Index           =   6
-               Left            =   5760
-               TabIndex        =   92
-               Top             =   960
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 6"
-               Height          =   375
-               Index           =   5
-               Left            =   5760
-               TabIndex        =   91
-               Top             =   480
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 5"
-               Height          =   375
-               Index           =   4
-               Left            =   5760
-               TabIndex        =   90
-               Top             =   0
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 4"
-               Height          =   375
-               Index           =   3
-               Left            =   3960
-               TabIndex        =   89
-               Top             =   1440
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 3"
-               Height          =   375
-               Index           =   2
-               Left            =   3960
-               TabIndex        =   88
-               Top             =   960
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 2"
-               Height          =   375
-               Index           =   1
-               Left            =   3960
-               TabIndex        =   87
-               Top             =   480
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewDefine 
-               Caption         =   "Define.."
-               Height          =   315
-               Left            =   0
-               TabIndex        =   86
-               Top             =   1800
-               Width           =   855
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Set 1"
-               Height          =   375
-               Index           =   0
-               Left            =   3960
-               TabIndex        =   85
-               Top             =   0
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "HTML"
-               Height          =   375
-               Index           =   11
-               Left            =   1920
-               TabIndex        =   52
-               Top             =   480
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Spreadsheets"
-               Height          =   375
-               Index           =   10
-               Left            =   120
-               TabIndex        =   51
-               Top             =   480
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Drawing File"
-               Height          =   375
-               Index           =   9
-               Left            =   1920
-               TabIndex        =   50
-               Top             =   0
-               Width           =   1700
-            End
-            Begin VB.CommandButton cmdViewSet 
-               Caption         =   "Text Output Files"
-               Height          =   375
-               Index           =   8
-               Left            =   120
-               TabIndex        =   49
-               Top             =   0
-               Width           =   1700
-            End
-         End
          Begin VB.Frame frameViewAllOut 
             BorderStyle     =   0  'None
             Height          =   2175
@@ -177,11 +53,11 @@ Begin VB.Form eplUI
             Begin VB.CommandButton cmdTblXML 
                Caption         =   "Table XML"
                Height          =   255
-               Left            =   6480
+               Left            =   6360
                TabIndex        =   101
-               ToolTipText     =   "EMS Actuator List"
+               ToolTipText     =   "XML version of tabular output report which contains summarized results"
                Top             =   720
-               Width           =   900
+               Width           =   1020
             End
             Begin VB.CommandButton cmdSlabErr 
                Caption         =   "Slab Err"
@@ -213,11 +89,11 @@ Begin VB.Form eplUI
             Begin VB.CommandButton cmdBsmtCSV 
                Caption         =   "Bsmt CSV"
                Height          =   255
-               Left            =   6480
+               Left            =   6360
                TabIndex        =   97
                ToolTipText     =   "Basement preprocessor monthly ground temperatures"
                Top             =   0
-               Width           =   900
+               Width           =   1020
             End
             Begin VB.CommandButton cmdBsmtAudit 
                Caption         =   "Bsmt Audit"
@@ -519,11 +395,135 @@ Begin VB.Form eplUI
             Begin VB.CommandButton cmdEDD 
                Caption         =   "EDD"
                Height          =   255
-               Left            =   6480
+               Left            =   6360
                TabIndex        =   54
                ToolTipText     =   "EMS Actuator List"
                Top             =   360
-               Width           =   900
+               Width           =   1020
+            End
+         End
+         Begin VB.Frame frameViewSelectOut 
+            BorderStyle     =   0  'None
+            Height          =   2175
+            Left            =   600
+            TabIndex        =   48
+            Top             =   360
+            Width           =   7455
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 8"
+               Height          =   375
+               Index           =   7
+               Left            =   5760
+               TabIndex        =   93
+               Top             =   1440
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 7"
+               Height          =   375
+               Index           =   6
+               Left            =   5760
+               TabIndex        =   92
+               Top             =   960
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 6"
+               Height          =   375
+               Index           =   5
+               Left            =   5760
+               TabIndex        =   91
+               Top             =   480
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 5"
+               Height          =   375
+               Index           =   4
+               Left            =   5760
+               TabIndex        =   90
+               Top             =   0
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 4"
+               Height          =   375
+               Index           =   3
+               Left            =   3960
+               TabIndex        =   89
+               Top             =   1440
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 3"
+               Height          =   375
+               Index           =   2
+               Left            =   3960
+               TabIndex        =   88
+               Top             =   960
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 2"
+               Height          =   375
+               Index           =   1
+               Left            =   3960
+               TabIndex        =   87
+               Top             =   480
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewDefine 
+               Caption         =   "Define.."
+               Height          =   315
+               Left            =   0
+               TabIndex        =   86
+               Top             =   1800
+               Width           =   855
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Set 1"
+               Height          =   375
+               Index           =   0
+               Left            =   3960
+               TabIndex        =   85
+               Top             =   0
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "HTML"
+               Height          =   375
+               Index           =   11
+               Left            =   1920
+               TabIndex        =   52
+               Top             =   480
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Spreadsheets"
+               Height          =   375
+               Index           =   10
+               Left            =   120
+               TabIndex        =   51
+               Top             =   480
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Drawing File"
+               Height          =   375
+               Index           =   9
+               Left            =   1920
+               TabIndex        =   50
+               Top             =   0
+               Width           =   1700
+            End
+            Begin VB.CommandButton cmdViewSet 
+               Caption         =   "Text Output Files"
+               Height          =   375
+               Index           =   8
+               Left            =   120
+               TabIndex        =   49
+               Top             =   0
+               Width           =   1700
             End
          End
          Begin MSComctlLib.TabStrip tabViewResults 
@@ -1764,6 +1764,7 @@ End Sub
 Private Sub Form_Activate()
 If firstActivateCall Then
   If updateAutoCheck Then Call checkForUpdatesNow(False)
+  Call checkIfApplicationDirectoryGood
   firstActivateCall = False
 End If
 End Sub
@@ -2211,7 +2212,8 @@ Private Sub mnuHelpAbout_Click()
 frmAbout.Show
 End Sub
 Private Sub mnuHelpEPDocs_Click()
-Call startAcrobat("EPlusMainMenu.pdf")
+'Call startAcrobat("EPlusMainMenu.pdf")
+Call viewWebPage(appPath & "Documentation\index.html")
 End Sub
 Private Sub mnuHelpGettingStarted_Click()
 Call startAcrobat("GettingStarted.pdf")
@@ -2245,7 +2247,7 @@ Private Sub mnuHelpTips_Click()
 Call startAcrobat("Tips_and_Tricks_Using_EnergyPlus.pdf")
 End Sub
 Private Sub mnuHelpAcknowledge_Click()
-Call startAcrobat("Acknowledgments.pdf")
+Call startAcrobat("Acknowledgements.pdf")
 End Sub
 Private Sub mnuHelpCheckUpdates_Click()
 Call checkForUpdatesNow(True)
@@ -2599,7 +2601,7 @@ If testViewConvertOld Then
       msg = msg & "is an old version (" & IDFversion & "). "
       msg = msg & "To update the file to the latest version ("
       msg = msg & currentVersion & ") use the IDFVersionUpdater program on the Utility tab. "
-      msg = msg & "And you may need to also download additional Transition programs from http://www.energyplus.gov/ on the Add-Ons page." & vbCrLf & vbCrLf
+      msg = msg & "And you may need to also download additional Transition programs from http://www.energyplus.net/ on the Extras page." & vbCrLf & vbCrLf
       msg = msg & "Proceed with simulation using old version?"
       If MsgBox(msg, vbOKCancel, "Check File Version") = vbCancel Then
         cancelDueToVersionCheck = True
@@ -3016,7 +3018,7 @@ If CreateRunEPBatch Then
   Do While Not EOF(flNum)
     Line Input #flNum, lineOfBatch
     Print #outFN, lineOfBatch
-    Debug.Print "Line of batch file: "; lineOfBatch
+    'Debug.Print "Line of batch file: "; lineOfBatch
   Loop
   Close flNum
   Close outFN
@@ -4273,7 +4275,7 @@ If firstUse = "True" Then
   'update checking
   updateLastAnchor = ""
   updateLastDate = "1/1/2008"
-  updatePageURL = "http://energyplus.gov/update/epupdate.htm"
+  updatePageURL = "http://energyplus.net/epupdate.htm"
   updateAutoCheck = True
   Call SaveAllSettings
 Else
@@ -4448,7 +4450,7 @@ Else
   If updateLastDate = "" Then updateLastDate = "1/1/2008"
   updatePageURL = GetSetting("EP-Launch", "UpdateCheck", "CheckURL")
   'If updatePageURL = "" Then updatePageURL = "http://gard.com/ep/epupdate.htm"
-  If updatePageURL = "" Then updatePageURL = "http://energyplus.gov/update/epupdate.htm"
+  If updatePageURL = "" Then updatePageURL = "http://energyplus.net/epupdate.htm"
   If Left(GetSetting("EP-Launch", "UpdateCheck", "AutoCheck"), 1) = "F" Then
     updateAutoCheck = False
   Else
@@ -4860,17 +4862,19 @@ Dim curIDFwPath As String
 Dim numTotalRuns As Integer
 Dim currentRunCounter As Integer
 Dim currentDirectory As String
+Dim recDateTime As Date
+Dim curDateTime As Date
 'Dim oldWinTitle As String
 Dim delay As Single
 'Note that outName and grpName are optional and are only supplied when called from a group run
 
+recDateTime = Now() 'get the current date and timestamp
+recDateTime = DateAdd("n", -1, recDateTime) 'subtract one minute just to provide cushion
 'oldWinTitle = eplUI.Caption
 delay = 0.05
-'remove existing files first
 On Error Resume Next
 'MsgBox "InIDF: " & InIDFfile & vbCrLf & "InWthr: " & InWthrFile & vbCrLf & "OutName: " & outName & vbCrLf & "GrpName: " & grpName, vbInformation, "Parametric arguments"
 
-Kill NoExtension(InIDFfile) & "-*.idf"
 Err.Clear 'don't worry if files not found
 'run parametric preprocessor
 appFileName = appPath & "PreProcess\ParametricPreprocessor\ParametricPreprocessor.exe"
@@ -4913,16 +4917,19 @@ currentRunCounter = 0
 curIDF = dir(NoExtension(InIDFfile) & "-*.idf")
 curIDFwPath = pathOnly(InIDFfile) & curIDF
 Do While curIDF <> ""
-  currentRunCounter = currentRunCounter + 1
-  Call Pause(delay)
-  'eplUI.Caption = Trim(Val(currentRunCounter)) & " of " & Trim(Val(numTotalRuns)) & "   " & oldWinTitle
-  'eplUI.Refresh
-  DoEvents
-  Call Pause(delay)
-  If IsMissing(grpName) Or IsMissing(outName) Or outName = "" Or grpName = "" Then
-    Call addToSimulationQueue(curIDFwPath, InWthrFile, NoExtension(curIDFwPath), "", currentRunCounter, False)
-  Else
-    Call addToSimulationQueue(curIDFwPath, InWthrFile, pathOnly(outName) & NoExtension(curIDF), grpName, currentRunCounter, False)
+  curDateTime = FileDateTime(curIDFwPath)
+  If curDateTime > recDateTime Then 'only include files that were recently created
+    currentRunCounter = currentRunCounter + 1
+    Call Pause(delay)
+    'eplUI.Caption = Trim(Val(currentRunCounter)) & " of " & Trim(Val(numTotalRuns)) & "   " & oldWinTitle
+    'eplUI.Refresh
+    DoEvents
+    Call Pause(delay)
+    If IsMissing(grpName) Or IsMissing(outName) Or outName = "" Or grpName = "" Then
+      Call addToSimulationQueue(curIDFwPath, InWthrFile, NoExtension(curIDFwPath), "", currentRunCounter, False)
+    Else
+      Call addToSimulationQueue(curIDFwPath, InWthrFile, pathOnly(outName) & NoExtension(curIDF), grpName, currentRunCounter, False)
+    End If
   End If
   curIDF = dir
   curIDFwPath = pathOnly(InIDFfile) & curIDF 'add back the full path to the file
@@ -6546,7 +6553,7 @@ lblCheckingUpdates.Visible = True
 'updatePageURL = "http://gard.com/ep/epupdateCR.htm"
 'updatePageURL = "http://gard.com/ep/junk.htm"
 'updatePageURL = "http://eeredevapps1.nrel.gov/buildings/energyplus/update/epupdate.htm"
-'updatePageURL = "http://energyplus.gov/update/epupdate.htm"
+'updatePageURL = "http://energyplus.net/epupdate.htm"
 'updateLastDate = "9/2/2009 12:47:47 AM"
 '-----------------------------------------
 
@@ -6777,6 +6784,39 @@ Else 'the buffer still has some text
 End If
 End Sub
 
+'=======================================================
+' Check the application directory and see if it is likely
+' to cause problems because of space or not being
+' able to write files there (such as when EnergyPlus
+' is installed in c:\program files\EnergyPlus
+'=======================================================
+Sub checkIfApplicationDirectoryGood()
+' assume it is a good directory
+Dim directoryCanBeWritten As Boolean
+Dim outFN As Integer
+Dim testFile As String
+directoryCanBeWritten = True
+Debug.Print "checkIfApplicationDirectoryGood apppath:", appPath
+On Error Resume Next
+Err.Clear
+outFN = FreeFile
+testFile = "test.bat"
+' MsgBox appPath & testFile
+Open appPath & testFile For Output As outFN
+If Err.Number <> 0 Then
+    directoryCanBeWritten = False
+End If
+Close outFN
+Kill appPath & testFile
+If Err.Number <> 0 Then
+    directoryCanBeWritten = False
+End If
+If Not directoryCanBeWritten Then
+    MsgBox "Invalid application directory:" + vbCrLf + vbCrLf + appPath + vbCrLf + vbCrLf + "You should consider uninstalling EnergyPlus and installing it in a directory such as c:\EnergyPlusVx-x-x that requires no special permission to write files.", vbInformation, "EP-Launch ERROR"
+ElseIf InStr(appPath, " ") > 0 And Not CreateRunEPBatch Then
+    MsgBox "Invalid application directory:" + vbCrLf + vbCrLf + appPath + vbCrLf + vbCrLf + "You should consider uninstalling EnergyPlus and installing it in a directory such as c:\EnergyPlusVx-x-x that has no spaces in the path. As an alternative you can also go to VIEW .. OPTIONS .. MISCELLANEOUS and check Create Batch File to Run EnergyPlus.", vbInformation, "EP-Launch ERROR"
+End If
+End Sub
 
 
 '     NOTICE
@@ -6785,7 +6825,7 @@ End Sub
 '     Version 1.0 (the "License"); you may not use this file except in compliance
 '     with the License. You may obtain a copy of the License at
 '
-'     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
+'     https://energyplus.net/licensing
 '
 '     Software distributed under the License is distributed on an "AS IS" basis,
 '     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for

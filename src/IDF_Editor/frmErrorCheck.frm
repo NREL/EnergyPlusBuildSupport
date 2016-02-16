@@ -93,7 +93,7 @@ Dim returnObj() As Long
 Dim returnFld() As Long
 
 
-Private Sub Form_Load()
+Private Sub performCheck()
 Dim i As Long
 Call curFormData.doValidityCheck(returnMsg(), returnClass(), returnObj(), returnFld())
 If returnMsg(1) <> "" Then
@@ -112,6 +112,11 @@ If checkRangeOnSave = checkRangeYes Then
 Else
   chkValidCheckOnSave.Value = vbUnchecked
 End If
+End Sub
+
+
+Private Sub Form_Load()
+Call performCheck
 End Sub
 
 Private Sub Form_Activate()
@@ -135,6 +140,7 @@ Dim cur As Long
 cur = lstMsgs.ItemData(lstMsgs.ListIndex)
 Me.Hide
 Call curFormData.jumpToObjectField(returnClass(cur), returnObj(cur), returnFld(cur))
+Unload Me
 End Sub
 
 Private Sub cmdClose_Click()
@@ -143,15 +149,15 @@ End Sub
 
 '     NOTICE
 '
-'     The contents of this file are subject to the EnergyPlus Open Source License 
-'     Version 1.0 (the "License"); you may not use this file except in compliance 
-'     with the License. You may obtain a copy of the License at 
+'     The contents of this file are subject to the EnergyPlus Open Source License
+'     Version 1.0 (the "License"); you may not use this file except in compliance
+'     with the License. You may obtain a copy of the License at
 '
 '     http://apps1.eere.energy.gov/buildings/energyplus/energyplus_licensing.cfm
 '
-'     Software distributed under the License is distributed on an "AS IS" basis, 
-'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for 
-'     the specific language governing rights and limitations under the License. 
+'     Software distributed under the License is distributed on an "AS IS" basis,
+'     WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+'     the specific language governing rights and limitations under the License.
 '
 '     Copyright © 1996-2014 GARD Analytics.  All rights reserved.
 '
