@@ -2621,6 +2621,15 @@ If testViewConvertOld Then
       msg = msg & "The simulation will proceed when you press OK."
       MsgBox msg, vbInformation, "VERSION object missing"
       cancelDueToVersionCheck = False
+    ElseIf isNewerVersion(IDFversion, currentVersion) Then
+      msg = "The file:" & vbCrLf & vbCrLf
+      msg = msg & "  " & inName & vbCrLf & vbCrLf
+      msg = msg & "is an not the same version (" & IDFversion & ") as the EnergyPlus version (" & currentVersion & ")."
+      msg = msg & "You may need download EnergyPlus from http://www.energyplus.net/." & vbCrLf & vbCrLf
+      msg = msg & "Proceed with simulation using the different version?"
+      If MsgBox(msg, vbOKCancel, "Check File Version") = vbCancel Then
+        cancelDueToVersionCheck = True
+      End If
     ElseIf IDFversion <> currentVersion Then
       msg = "The file:" & vbCrLf & vbCrLf
       msg = msg & "  " & inName & vbCrLf & vbCrLf
@@ -5743,6 +5752,51 @@ End If
 'MsgBox "Version of IDF: " & checkIDFVersion & " -- " & lineCount & " -- " & Timer - startTime, vbOKOnly, "CheckIDFVersion"
 Debug.Print "Time to check for version: "; Timer - startTime
 End Function
+
+'=======================================================
+' Return true if version A is newer than version B and
+' false if not or if it cannot be determined
+'=======================================================
+Function isNewerVersion(versionA, versionB) As Boolean
+Dim aVerNum As Long
+Dim bVerNum As Long
+aVerNum = convertVersionToNumber(versionA)
+bVerNum = convertVersionToNumber(versionB)
+If aVerNum > 0 And bVerNum > 0 Then
+    If aVerNum > bVerNum Then
+        isNewerVersion = True
+    Else
+        isNewerVersion = False
+    End If
+Else
+    isNewerVersion = False
+End If
+End Function
+
+'=======================================================
+' Convert a version string in the format of 8.5.1 into
+' an integer of 80501
+'=======================================================
+Function convertVersionToNumber(versionString) As Long
+Dim parts() As String
+Dim verNum As Long
+Dim i As Integer
+parts = Split(versionString, ".")
+verNum = 0
+If UBound(parts) = 2 Then
+    For i = 0 To UBound(parts)
+        If IsNumeric(parts(i)) Then
+            verNum = verNum * 100 + Val(parts(i))
+        Else
+            verNum = 0 ' if any parts are not numeric then exit function with a zero.
+            Exit For
+        End If
+    Next i
+End If
+convertVersionToNumber = verNum
+'MsgBox "convertVersionToNumber: " & versionString & " into " & verNum, vbOKOnly
+End Function
+
 
 '=======================================================
 ' Remove the part of the string
